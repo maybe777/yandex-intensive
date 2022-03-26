@@ -1,0 +1,5 @@
+.wrapper {
+    min-height: 50px;
+    display: flex;
+    align-content: center;
+}
