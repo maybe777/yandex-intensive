@@ -45,12 +45,12 @@ export default class BurgerIngredients extends React.Component<BurgerIngredients
         const ALL = [{title: 'Булки', data: BUNS}, {title: 'Соусы', data: SAUCE}, {title: 'Начинки', data: NOVICE}];
 
         const catalog = ALL.map((item, index) => (
-            <div key={'burger_cat_' + index} className={styles.category}>
+            <div key={item.title} className={styles.category}>
                 <div className={styles.categoryTitle}>
                     <h2>{item.title}</h2>
                 </div>
                 {item.data.map((cat: any, index: string | number | null | undefined) => (
-                    <div key={'burger_item_' + index} className={styles.ingredient + " mb-3"}>
+                    <div key={cat._id} className={styles.ingredient + " mb-3"}>
                         <div>
                             <img src={cat.image} alt={"Burger item"}/>
                         </div>
