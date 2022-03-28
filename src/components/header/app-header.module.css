@@ -1,0 +1,17 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 88px;
+    font-family: "JetBrains Mono", sans-serif;
+    color: #8585AD;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.logo {
+    flex-basis: 40%;
+}

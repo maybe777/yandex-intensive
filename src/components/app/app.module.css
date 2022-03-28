@@ -1,0 +1,50 @@
+ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin-right: 10px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+ul a {
+    color: #8585AD;
+    text-decoration: none;
+}
+
+ul li {
+    padding: 0;
+    margin: 4px;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1150px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.appContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.topic {
+    min-height: 50px;
+    display: flex;
+    align-content: center;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    color: #61dafb;
+}
+
+::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}
