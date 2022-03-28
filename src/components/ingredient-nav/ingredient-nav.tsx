@@ -11,14 +11,14 @@ export default class IngredientNav extends React.Component {
 
         const list = ITEMS.map((item, index) =>
             (
-                <span className={styles.navigation} key={index}>
+                <span className={"text text_type_main-default pb-5"} key={'tab_nav_' + index}>
                     {item}
                 </span>
             )
         );
 
         return (
-            <div className={styles.navigationContainer}>
+            <div className={styles.navigationContainer + " mb-3 pt-3"}>
                 {list}
             </div>
         );

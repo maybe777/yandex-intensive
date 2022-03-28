@@ -9,7 +9,7 @@ export default class AppHeader extends React.Component {
         return (
             <header>
                 <nav>
-                    <ul>
+                    <ul className={"mr-2 mt-2 mb-2 p-0"}>
                         <li>
                             <BurgerIcon type={"secondary"}/>
                         </li>
@@ -17,7 +17,7 @@ export default class AppHeader extends React.Component {
                             <a href={"#"}>Конструктор</a>
                         </li>
                     </ul>
-                    <ul>
+                    <ul className={"mr-2 mt-2 mb-2 p-0"}>
                         <li>
                             <ListIcon type={"secondary"}/>
                         </li>

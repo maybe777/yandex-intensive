@@ -2,13 +2,4 @@
     display: flex;
     justify-content: space-around;
     border-bottom: 1px #2F2F37 solid;
-    margin-bottom: 20px;
-    padding-top: 20px;
-}
-
-.navigation {
-    height: 40px;
-    font-weight: 400;
-    line-height: 24px;
-    text-align: center;
 }

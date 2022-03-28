@@ -1,40 +1,61 @@
 import React from 'react';
 import styles from './burger-ingredients.module.css'
-import data from '../utils/data.json'
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientNav from "../ingredient-nav/ingredient-nav";
 
 
-export default class BurgerIngredients extends React.Component {
+export type BurgerData = {
+    _id: string,
+    name: string,
+    type: string,
+    proteins: number,
+    fat: number,
+    carbohydrates: number,
+    calories: number,
+    price: number,
+    image: string,
+    image_mobile: string,
+    image_large: string,
+    __v: number
+}[]
+
+interface BurgerIngredientsProps {
+    data: BurgerData;
+}
+
+export default class BurgerIngredients extends React.Component<BurgerIngredientsProps> {
 
     render() {
 
-        const BUNS = data.filter((item) => {
+        // @ts-ignore
+        const BUNS = this.props.data.filter((item) => {
             return item.type === "bun";
         })
 
-        const SAUCE = data.filter((item) => {
+        // @ts-ignore
+        const SAUCE = this.props.data.filter((item) => {
             return item.type === "sauce";
         })
 
-        const NOVICE = data.filter((item) => {
+        // @ts-ignore
+        const NOVICE = this.props.data.filter((item) => {
             return item.type === "main";
         })
 
         const ALL = [{title: 'Булки', data: BUNS}, {title: 'Соусы', data: SAUCE}, {title: 'Начинки', data: NOVICE}];
 
         const catalog = ALL.map((item, index) => (
-            <div className={styles.category}>
+            <div key={'burger_cat_' + index} className={styles.category}>
                 <div className={styles.categoryTitle}>
-                    <h1 key={index}>{item.title}</h1>
+                    <h2>{item.title}</h2>
                 </div>
-                {item.data.map((cat, index) => (
-                    <div key={index} className={styles.ingredient}>
+                {item.data.map((cat: any, index: string | number | null | undefined) => (
+                    <div key={'burger_item_' + index} className={styles.ingredient + " mb-3"}>
                         <div>
                             <img src={cat.image} alt={"Burger item"}/>
                         </div>
-                        <div className={styles.price}>
-                            <span className={styles.priceIcon}>
+                        <div className={styles.price + " text text_type_digits-default"}>
+                            <span className={"mr-2"}>
                                 {cat.price}
                             </span>
                             <span>

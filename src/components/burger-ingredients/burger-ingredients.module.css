@@ -29,7 +29,6 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-bottom: 40px;
 }
 
 .ingredient img {
@@ -48,10 +47,6 @@
 .price {
     display: flex;
     justify-content: center;
-}
-
-.priceIcon {
-    margin-right: 5px;
 }
 
 .description {

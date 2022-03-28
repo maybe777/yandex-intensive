@@ -12,25 +12,6 @@ nav {
     justify-content: flex-start;
 }
 
-ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin-right: 10px;
-    margin-top: 16px;
-    margin-bottom: 16px;
-}
-
-ul a {
-    color: #8585AD;
-    text-decoration: none;
-}
-
-ul li {
-    padding: 0;
-    margin: 4px;
-}
-
 .logo {
     flex-basis: 40%;
 }
