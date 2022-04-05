@@ -1,15 +1,17 @@
-header {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 88px;
     font-family: "JetBrains Mono", sans-serif;
     color: #8585AD;
+    height: 88px;
+    grid-area: header;
 }
 
 nav {
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
+    vertical-align: middle;
 }
 
 .logo {
