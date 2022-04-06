@@ -1,14 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './burger-constructor.module.css'
 import {Button, ConstructorElement, CurrencyIcon, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import { BurgerData } from '../app/app';
+import {BurgerData} from '../app/app';
+import withModal from "../hocs/with-modal";
+import OrderDetails from "../details-order/order-details";
 
 
 interface IBurgerConstructor {
     data: BurgerData[]
 }
 
+interface IBurgerConstructorState {
+    isVisible?: Boolean
+}
+
 export default function BurgerConstructor(props: IBurgerConstructor) {
+
+    const [state, setState] = useState<IBurgerConstructorState>({
+        isVisible: false
+    })
+
+    function openModal() {
+        setState({...state, isVisible: true})
+    }
+
+    function closeModal() {
+        setState({...state, isVisible: false})
+    }
+
+    const WithModal = withModal(OrderDetails);
 
     return (
         <div>
@@ -52,7 +72,8 @@ export default function BurgerConstructor(props: IBurgerConstructor) {
                         <span className={"text text_type_digits-medium"}>610</span>
                         <span className={styles.currency}> <CurrencyIcon type={"primary"}/></span>
                     </div>
-                    <Button type={"primary"} size={"large"}>Оформить заказ</Button>
+                    <Button type={"primary"} size={"large"} onClick={openModal}>Оформить заказ</Button>
+                    <WithModal isOpen={state.isVisible} onClose={closeModal}/>
                 </div>
             </div>
         </div>

@@ -3,13 +3,14 @@ import {ListIcon, Logo, ProfileIcon} from '@ya.praktikum/react-developer-burger-
 import {BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './app-header.module.css';
 
+
 interface MainState {
     isHoverConstr?: Boolean;
     isHoverFeed: Boolean,
     isHoverProfile: Boolean
 }
 
-export default function AppHeader(){
+export default function AppHeader() {
 
     const [state, setState] = useState<MainState>({
         isHoverConstr: false,
@@ -19,7 +20,7 @@ export default function AppHeader(){
 
     const hoverHandlerConstr = () => {
         // @ts-ignore
-        setState({isHoverConstr : !state.isHoverConstr});
+        setState({isHoverConstr: !state.isHoverConstr});
     };
 
     const hoverHandlerFeed = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ErrorPage() {
+export default function ErrorHandler() {
 
     return (
         <div>

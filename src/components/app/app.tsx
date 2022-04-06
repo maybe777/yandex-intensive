@@ -4,7 +4,7 @@ import AppHeader from "../header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import styles from './app.module.css'
-import ErrorPage from "../error/error";
+import ErrorHandler from "../error/error-handler";
 
 
 export type BurgerData = {
@@ -25,6 +25,7 @@ export type BurgerData = {
 interface MainState {
     isLoading?: Boolean,
     isError?: Boolean,
+    visible?: Boolean,
     data: BurgerData[]
 }
 
@@ -35,6 +36,7 @@ function App() {
     const [state, setState] = useState<MainState>({
         isLoading: false,
         isError: false,
+        visible: false,
         data: []
     });
 
@@ -62,11 +64,12 @@ function App() {
     if (state.isError === true) {
         return (
             <div className={styles.container}>
-                <ErrorPage/>
+                <ErrorHandler/>
             </div>
         )
     } else {
         return (
+            <body>
             <div className={styles.container}>
                 <AppHeader/>
                 <div className={styles.topic}>
@@ -75,6 +78,7 @@ function App() {
                 <BurgerIngredients data={state.data}/>
                 <BurgerConstructor data={state.data}/>
             </div>
+            </body>
         );
     }
 }
