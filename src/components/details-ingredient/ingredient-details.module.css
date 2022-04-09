@@ -1,0 +1,50 @@
+.container {
+    display: grid;
+    grid-template: 'img img img img'
+                    'title title title title'
+                    'prop1 prop2 prop3 prop4';
+    justify-items: center;
+    justify-content: center;
+    row-gap: 32px;
+}
+
+.container ul {
+    list-style: none;
+}
+
+.picture {
+    justify-items: center;
+    grid-area: img;
+}
+
+.title {
+    grid-area: title;
+}
+
+.prop1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: prop1;
+}
+
+.prop2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: prop2;
+}
+
+.prop3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: prop3;
+}
+
+.prop4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: prop4;
+}

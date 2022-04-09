@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './burger-ingredients.module.css'
-import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientNav from "../ingredient-nav/ingredient-nav";
 import {BurgerData} from "../app/app";
 import IngredientDetails from "../details-ingredient/ingredient-details";
 import withModal from "../hocs/with-modal";
+import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 
 
 interface BurgerIngredientsProps {
@@ -12,17 +12,19 @@ interface BurgerIngredientsProps {
 }
 
 interface IBurgerIngredientsState {
-    isVisible?: Boolean
+    isVisible?: Boolean,
+    item: any
 }
 
-export default function BurgerIngredients(props: BurgerIngredientsProps) {
+export default function BurgerIngredients(props: BurgerIngredientsProps, forwardedRef: any) {
 
     const [state, setState] = useState<IBurgerIngredientsState>({
-        isVisible: false
+        isVisible: false,
+        item: null
     })
 
-    function openModal() {
-        setState({...state, isVisible: true})
+    function openModal(id: string) {
+        setState({...state, isVisible: true, item: id})
     }
 
     function closeModal() {
@@ -48,27 +50,16 @@ export default function BurgerIngredients(props: BurgerIngredientsProps) {
 
     const WithModal = withModal(IngredientDetails);
 
-    const catalog = ALL.map((item, index) => (
-        <div key={item.title} className={styles.category}>
+    const catalog = ALL.map((category, index) => (
+        <div key={category.title} className={styles.category}>
             <div className={styles.categoryTitle}>
-                <h2>{item.title}</h2>
+                <h2>{category.title}</h2>
             </div>
-            {item.data.map((cat: any, index: string | number | null | undefined) => (
-                <div key={cat._id} className={styles.ingredient + " mb-3"} onClick={openModal}>
-                    <div>
-                        <img src={cat.image} alt={"Burger item"}/>
-                    </div>
-                    <div className={styles.price + " text text_type_digits-default"}>
-                            <span className={"mr-2"}>
-                                {cat.price}
-                            </span>
-                        <span>
-                                <CurrencyIcon type={"primary"}/>
-                            </span>
-                    </div>
-                    <div className={styles.description}>
-                        <p>{cat.name}</p>
-                    </div>
+            {category.data.map((item: any) => (
+                <div key={item._id} className={styles.ingredient + " mb-3"} onClick={() => {
+                    openModal(item)
+                }}>
+                    <BurgerIngredient {...item} />
                 </div>
             ))}
         </div>
@@ -77,7 +68,7 @@ export default function BurgerIngredients(props: BurgerIngredientsProps) {
     return (
         <div className={styles.ingredientWrapper}>
             <IngredientNav/>
-            <WithModal isOpen={state.isVisible} onClose={closeModal}/>
+            <WithModal isOpen={state.isVisible} onClose={closeModal} header={"Детали ингредиента"} {...state.item}/>
             <div className={styles.ingredients}>
                 {catalog}
             </div>

@@ -1,6 +1,5 @@
 .modal {
     width: 720px;
-    height: 718px;
     background-color: #1C1C21;
     position: fixed;
     top: 50%;
@@ -9,22 +8,34 @@
     overflow: hidden;
     z-index: 1000;
     border-radius: 30px;
+    padding-bottom: 40px;
 }
 
-.modalContainer{
+.modalContainer {
     padding: 40px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: 'head close'
+'main main';
     justify-content: center;
+}
+
+.head {
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    grid-area: head;
 }
 
 .close {
     padding-top: 20px;
     display: flex;
     justify-content: flex-end;
+    grid-area: close;
 }
 
 .content {
     display: flex;
     justify-content: center;
+    grid-area: main;
 }
