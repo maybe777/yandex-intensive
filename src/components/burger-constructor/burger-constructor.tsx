@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styles from './burger-constructor.module.css'
 import {Button, ConstructorElement, CurrencyIcon, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import {BurgerData} from '../app/app';
+import {BurgerData, BurgerItem} from '../app/app';
 import withModal from "../hocs/with-modal";
 import OrderDetails from "../details-order/order-details";
 
@@ -49,11 +49,11 @@ export default function BurgerConstructor(props: IBurgerConstructor) {
                                 </div>
                                 <div className={styles.item + " pt-2 mr-2"}>
                                     <ConstructorElement key={index}
-                                        // @ts-ignore
+                                        //@ts-ignore
                                                         text={item.name}
-                                        // @ts-ignore
+                                        //@ts-ignore
                                                         thumbnail={item.image}
-                                        // @ts-ignore
+                                        //@ts-ignore
                                                         price={item.price}/>
                                 </div>
                             </li>

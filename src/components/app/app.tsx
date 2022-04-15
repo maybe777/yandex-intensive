@@ -25,7 +25,7 @@ export type BurgerData = {
 export type BurgerItem = {
     _id: string,
     name: string,
-    type: string,
+    type?: String,
     proteins: number,
     fat: number,
     carbohydrates: number,

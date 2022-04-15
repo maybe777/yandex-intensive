@@ -5,7 +5,7 @@ import styles from './app-header.module.css';
 
 
 interface MainState {
-    isHoverConstr?: Boolean;
+    isHoverConstr: Boolean;
     isHoverFeed: Boolean,
     isHoverProfile: Boolean
 }
@@ -19,18 +19,17 @@ export default function AppHeader() {
     });
 
     const hoverHandlerConstr = () => {
-        // @ts-ignore
-        setState({isHoverConstr: !state.isHoverConstr});
+
+        setState({...state, isHoverConstr: !state.isHoverConstr});
     };
 
     const hoverHandlerFeed = () => {
-        // @ts-ignore
-        setState({isHoverFeed: !state.isHoverFeed});
+
+        setState({...state, isHoverFeed: !state.isHoverFeed});
     };
 
     const hoverHandlerProfile = () => {
-        // @ts-ignore
-        setState({isHoverProfile: !state.isHoverProfile});
+        setState({...state, isHoverProfile: !state.isHoverProfile});
     };
 
 

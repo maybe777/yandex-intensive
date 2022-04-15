@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import ReactDOM from "react-dom";
 import styles from "./with-modal.module.css";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import ModalOverlay from "../modal-overlay/modal-overlay";
 
 
 const withModal = (WrappedComponent: any) => (props: any) => {
@@ -43,19 +44,22 @@ const withModal = (WrappedComponent: any) => (props: any) => {
         if (!props.isOpen || !isOpen) return null;
 
         return ReactDOM.createPortal(
-            <div ref={modalRef} className={styles.modal}>
-                <div className={styles.modalContainer}>
-                    {props.header && props.header.length > 0 && <div className={styles.head}>
-                        <p className={"text text_type_main-large pt-2"}>{props.header}</p>
-                    </div>}
-                    <div className={styles.close}>
-                        <CloseIcon type={'primary'} onClick={props.onClose}/>
-                    </div>
-                    <div className={styles.content}>
-                        <WrappedComponent {...props}/>
+            <>
+                <ModalOverlay/>
+                <div ref={modalRef} className={styles.modal}>
+                    <div className={styles.modalContainer}>
+                        {props.header && props.header.length > 0 && <div className={styles.head}>
+                            <p className={"text text_type_main-large pt-2"}>{props.header}</p>
+                        </div>}
+                        <div className={styles.close}>
+                            <CloseIcon type={'primary'} onClick={props.onClose}/>
+                        </div>
+                        <div className={styles.content}>
+                            <WrappedComponent {...props}/>
+                        </div>
                     </div>
                 </div>
-            </div>,
+            </>,
             // @ts-ignore
             document.getElementById('modal')
         );

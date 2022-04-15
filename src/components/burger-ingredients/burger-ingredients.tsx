@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './burger-ingredients.module.css'
 import IngredientNav from "../ingredient-nav/ingredient-nav";
 import {BurgerData} from "../app/app";
@@ -13,14 +13,14 @@ interface BurgerIngredientsProps {
 
 interface IBurgerIngredientsState {
     isVisible?: Boolean,
-    item: any
+    item: String
 }
 
-export default function BurgerIngredients(props: BurgerIngredientsProps, forwardedRef: any) {
+export default function BurgerIngredients(props: BurgerIngredientsProps) {
 
     const [state, setState] = useState<IBurgerIngredientsState>({
         isVisible: false,
-        item: null
+        item: ''
     })
 
     function openModal(id: string) {
