@@ -4,7 +4,6 @@ import styles from './ingredient-nav.module.css';
 
 export default class IngredientNav extends React.Component {
 
-
     render() {
 
         const ITEMS = ['Булки', 'Соусы', 'Начинка'];
