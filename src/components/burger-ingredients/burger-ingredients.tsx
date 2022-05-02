@@ -1,22 +1,21 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styles from './burger-ingredients.module.css'
 import IngredientNav from "../ingredient-nav/ingredient-nav";
-import {BurgerData} from "../app/app";
 import IngredientDetails from "../details-ingredient/ingredient-details";
 import withModal from "../hocs/with-modal";
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
+import {AppContext} from "../../service/app-context";
+import {BurgerData} from "../app/app";
 
-
-interface BurgerIngredientsProps {
-    data: BurgerData[];
-}
 
 interface IBurgerIngredientsState {
     isVisible?: Boolean,
     item: String
 }
 
-export default function BurgerIngredients(props: BurgerIngredientsProps) {
+export default function BurgerIngredients() {
+
+    const data = useContext(AppContext);
 
     const [state, setState] = useState<IBurgerIngredientsState>({
         isVisible: false,
@@ -31,18 +30,15 @@ export default function BurgerIngredients(props: BurgerIngredientsProps) {
         setState({...state, isVisible: false})
     }
 
-    const BUNS = props.data.filter((item) => {
-        // @ts-ignore
+    const BUNS: BurgerData[] = data.filter((item: BurgerData | any) => {
         return item.type === "bun";
     })
 
-    const SAUCE = props.data.filter((item) => {
-        // @ts-ignore
+    const SAUCE: BurgerData[] = data.filter((item: BurgerData | any) => {
         return item.type === "sauce";
     })
 
-    const NOVICE = props.data.filter((item) => {
-        // @ts-ignore
+    const NOVICE: BurgerData[] = data.filter((item: BurgerData | any) => {
         return item.type === "main";
     })
 

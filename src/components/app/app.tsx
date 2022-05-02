@@ -5,6 +5,7 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import styles from './app.module.css'
 import ErrorHandler from "../error/error-handler";
+import {AppContext} from "../../service/app-context";
 
 
 export type BurgerData = {
@@ -89,8 +90,10 @@ function App() {
                 <div className={styles.topic}>
                     <h1>Соберите бургер</h1>
                 </div>
-                <BurgerIngredients data={state.data}/>
-                <BurgerConstructor data={state.data}/>
+                <AppContext.Provider value={state.data}>
+                    <BurgerIngredients />
+                    <BurgerConstructor />
+                </AppContext.Provider>
             </div>
         );
     }
