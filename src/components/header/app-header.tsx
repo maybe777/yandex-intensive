@@ -36,7 +36,7 @@ export default function AppHeader() {
     return (
         <header className={styles.header}>
             <nav>
-                <ul className={"mr-2 mt-2 mb-2 p-0"}>
+                <ul className={"mr-5 mt-2 mb-2 p-0"}>
                     <li>
                         <BurgerIcon type={state.isHoverConstr ? "primary" : "secondary"}/>
                         <a onMouseEnter={hoverHandlerConstr} onMouseOut={hoverHandlerConstr} href={"#"}>
@@ -44,7 +44,7 @@ export default function AppHeader() {
                         </a>
                     </li>
                 </ul>
-                <ul className={"mr-2 mt-2 mb-2 p-0"}>
+                <ul className={"mr-5 mt-2 mb-2 p-0"}>
                     <li>
                         <ListIcon type={state.isHoverFeed ? "primary" : "secondary"}/>
                         <a onMouseEnter={hoverHandlerFeed} onMouseOut={hoverHandlerFeed} href={"#"}>

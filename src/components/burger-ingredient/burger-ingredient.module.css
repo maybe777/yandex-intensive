@@ -1,0 +1,17 @@
+.counter {
+    font-family: 'Iceland';
+    font-weight: 400;
+    text-align: center;
+    float: right;
+    width: 32px;
+    height: 32px;
+    font-size: 28px;
+    color: #F2F2F3;
+    background-color: #4C4CFF;
+    border-radius: 32px;
+}
+
+.price {
+    display: flex;
+    justify-content: center;
+}

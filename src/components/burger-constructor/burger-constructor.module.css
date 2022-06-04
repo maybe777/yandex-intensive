@@ -1,3 +1,11 @@
+.main {
+    min-width: 495px;
+}
+
+.onHoverMain {
+    border: 1px green solid;
+}
+
 .constructor {
     height: 80%;
     grid-area: constructor;
@@ -44,5 +52,18 @@
     align-items: center;
     justify-content: flex-end;
     align-content: center;
+}
+
+.chiefContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 30px;
+    align-items: center;
+}
+
+.chief {
+    width: 40%;
+    height: 50%
 }
 
