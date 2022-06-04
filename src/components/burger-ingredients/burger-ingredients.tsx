@@ -64,7 +64,7 @@ export default function BurgerIngredients() {
     function closeModal() {
         setState({...state, isVisible: false})
         // @ts-ignore
-        dispatch(closeDetails())
+        dispatch(closeDetails)
     }
 
     const BUNS: BurgerItem[] = data.filter((item: BurgerItem | any) => {

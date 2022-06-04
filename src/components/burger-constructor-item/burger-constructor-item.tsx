@@ -1,5 +1,5 @@
 import React, {useRef} from 'react'
-import styles from "../burger-constructor/burger-constructor.module.css";
+import styles from "./burger-constructor-item.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {removeItem, sortItem} from "../../redux/actions/constructor-actions";
 import {useDrag, useDrop} from "react-dnd";

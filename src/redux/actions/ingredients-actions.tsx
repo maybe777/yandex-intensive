@@ -27,7 +27,8 @@ export function getData() {
             .then(() => console.log("Data loading success."))
             .catch(err => {
                 dispatch({
-                    type: GET_DATA_ERROR
+                    type: GET_DATA_ERROR,
+                    error: err
                 });
             });
     }

@@ -2,10 +2,6 @@
     min-width: 495px;
 }
 
-.onHoverMain {
-    border: 1px green solid;
-}
-
 .constructor {
     height: 80%;
     grid-area: constructor;
@@ -37,10 +33,6 @@
     width: 100%;
 }
 
-.drag {
-    /*width: 7%;*/
-}
-
 .currency {
     height: 33px;
     width: 33px;
@@ -66,4 +58,3 @@
     width: 40%;
     height: 50%
 }
-

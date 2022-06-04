@@ -1,14 +1,14 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './burger-constructor.module.css'
-import {Button, ConstructorElement, CurrencyIcon, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Button, ConstructorElement, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import withModal from "../hocs/with-modal";
 import OrderDetails from "../details-order/order-details";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import {addItem} from "../../redux/actions/constructor-actions";
 import BurgerConstructorItem from "../burger-constructor-item/burger-constructor-item";
-import chief from '../../images/cooking.png'
 import ChiefCook from "../chief-cook/chief-cook";
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default function BurgerConstructor() {
@@ -16,8 +16,6 @@ export default function BurgerConstructor() {
     const data = useSelector((store: any) => store.burger.items)
 
     const dispatch = useDispatch();
-
-    const dropSortRef = useRef(null)
 
     const [state, setState] = useState<IBurgerConstructorState>({
         isVisible: false
@@ -96,7 +94,7 @@ export default function BurgerConstructor() {
                 {INGREDIENTS.length > 0 ?
                     <ul className={styles.list}>
                         {INGREDIENTS.map((item: BurgerItem | any, index: number) => (
-                            <li key={'novice_item_' + index} className={styles.item}>
+                            <li key={uuidv4()} className={styles.item}>
                                 <BurgerConstructorItem item={item} index={index + 1}/>
                             </li>
                         ))}

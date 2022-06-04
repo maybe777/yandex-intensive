@@ -24,6 +24,7 @@ const ingredientsReducer = (state: IIngredientState = initialState, action: any)
                 data: action.payload
             }
         case GET_DATA_ERROR:
+            console.log(action.error)
             return {
                 ...state,
                 dataFailed: true,

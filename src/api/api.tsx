@@ -1,8 +1,8 @@
 import React from "react";
 
-
-const ORDER_URL: string = "https://norma.nomoreparties.space/api/orders"
-const INGREDIENTS_URL: string = "https://norma.nomoreparties.space/api/ingredients"
+const BASE_URL = "https://norma.nomoreparties.space/api/"
+const ORDER_URL: string = BASE_URL + "orders"
+const INGREDIENTS_URL: string = BASE_URL + "ingredients"
 const TEMP_ORDER_MOCK_ID: string = "60d3b41abdacab0026a733c6"
 
 export const dataRequest = async () => {
@@ -10,7 +10,7 @@ export const dataRequest = async () => {
     let result: BurgerItem[] = [];
 
     await fetch(INGREDIENTS_URL)
-        .then(res => res.json())
+        .then(checkResponse)
         .then(data => {
             if (data.success === true) {
                 result = data.data
@@ -18,10 +18,6 @@ export const dataRequest = async () => {
                 throw new Error("Loading error.")
             }
         })
-        .catch(e => {
-            console.log(e)
-        });
-
     return result;
 }
 
@@ -37,7 +33,7 @@ export async function fetchOrder() {
         },
         body: JSON.stringify({ingredients: TEMP_ORDER_MOCK_ID})
     })
-        .then(res => res.json())
+        .then(checkResponse)
         .then(data => {
             if (data.success === true) {
                 result = data.order.number
@@ -45,9 +41,12 @@ export async function fetchOrder() {
                 throw new Error("Loading error.")
             }
         })
-        .catch(e => {
-            console.log(e)
-        })
-
     return result;
+}
+
+export function checkResponse(res: any){
+    if (res.ok) {
+        return res.json()
+    }
+    throw new Error('Network response was not status 200.');
 }
