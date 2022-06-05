@@ -40,7 +40,7 @@ export default function BurgerConstructorItem({item, index}) {
 
             // @ts-ignore
             const hoverBoundRect = dndRef.current?.getBoundingClientRect()
-            const hoverY = (hoverBoundRect.bottom - hoverBoundRect.top) / 2
+            const hoverY = (hoverBoundRect.bottom - hoverBoundRect.top) / 1.2
             const clientOffset = monitor.getClientOffset()
             // @ts-ignore
             const clientY = clientOffset?.y - hoverBoundRect?.top
