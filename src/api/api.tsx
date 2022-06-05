@@ -44,7 +44,7 @@ export async function fetchOrder() {
     return result;
 }
 
-export function checkResponse(res: any){
+export function checkResponse(res: Response){
     if (res.ok) {
         return res.json()
     }

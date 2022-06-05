@@ -25,12 +25,12 @@ export function getOrder() {
                         payload: res
                     });
                 } else {
-                    dispatch(orderError);
+                    dispatch(orderError());
                 }
             })
             .then(() => console.log("Get Order number success."))
             .catch(err => {
-                dispatch(orderError);
+                dispatch(orderError());
             });
     }
 

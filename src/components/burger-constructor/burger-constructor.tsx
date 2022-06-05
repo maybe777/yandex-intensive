@@ -8,7 +8,6 @@ import {useDrop} from "react-dnd";
 import {addItem} from "../../redux/actions/constructor-actions";
 import BurgerConstructorItem from "../burger-constructor-item/burger-constructor-item";
 import ChiefCook from "../chief-cook/chief-cook";
-import { v4 as uuidv4 } from 'uuid';
 
 
 export default function BurgerConstructor() {
@@ -94,7 +93,7 @@ export default function BurgerConstructor() {
                 {INGREDIENTS.length > 0 ?
                     <ul className={styles.list}>
                         {INGREDIENTS.map((item: BurgerItem | any, index: number) => (
-                            <li key={uuidv4()} className={styles.item}>
+                            <li key={item.__v} className={styles.item}>
                                 <BurgerConstructorItem item={item} index={index + 1}/>
                             </li>
                         ))}
