@@ -7,22 +7,6 @@ import styles from './app.module.css'
 import ErrorHandler from "../error/error-handler";
 import {AppContext} from "../../service/app-context";
 
-
-export type BurgerData = {
-    _id: string,
-    name: string,
-    type: string,
-    proteins: number,
-    fat: number,
-    carbohydrates: number,
-    calories: number,
-    price: number,
-    image: string,
-    image_mobile: string,
-    image_large: string,
-    __v: number
-}[]
-
 export type BurgerItem = {
     _id: string,
     name: string,
@@ -42,12 +26,21 @@ interface MainState {
     isLoading?: Boolean,
     isError?: Boolean,
     visible?: Boolean,
-    data: BurgerData[]
+    data: BurgerItem[]
+}
+
+export const BASE_URL = "https://norma.nomoreparties.space/api"
+
+export function checkResponse(res: Response){
+    if (res.ok) {
+        return res.json()
+    }
+    throw new Error('Network response was not status 200.');
 }
 
 function App() {
 
-    const URL = "https://norma.nomoreparties.space/api/ingredients"
+    const URL = BASE_URL + "/ingredients"
 
     const [state, setState] = useState<MainState>({
         isLoading: false,
@@ -63,7 +56,7 @@ function App() {
     const fetchData = async () => {
         setState({...state, isLoading: true});
         await fetch(URL)
-            .then(res => res.json())
+            .then(checkResponse)
             .then(data => {
                 if (data.success === true) {
                     setState({...state, isLoading: false, data: data.data})
@@ -91,8 +84,8 @@ function App() {
                     <h1>Соберите бургер</h1>
                 </div>
                 <AppContext.Provider value={state.data}>
-                    <BurgerIngredients />
-                    <BurgerConstructor />
+                    <BurgerIngredients/>
+                    <BurgerConstructor/>
                 </AppContext.Provider>
             </div>
         );

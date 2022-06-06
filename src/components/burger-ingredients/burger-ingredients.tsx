@@ -5,7 +5,7 @@ import IngredientDetails from "../details-ingredient/ingredient-details";
 import withModal from "../hocs/with-modal";
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 import {AppContext} from "../../service/app-context";
-import {BurgerData} from "../app/app";
+import {BurgerItem} from "../app/app";
 
 
 interface IBurgerIngredientsState {
@@ -30,15 +30,15 @@ export default function BurgerIngredients() {
         setState({...state, isVisible: false})
     }
 
-    const BUNS: BurgerData[] = data.filter((item: BurgerData | any) => {
+    const BUNS: BurgerItem[] = data.filter((item: BurgerItem | any) => {
         return item.type === "bun";
     })
 
-    const SAUCE: BurgerData[] = data.filter((item: BurgerData | any) => {
+    const SAUCE: BurgerItem[] = data.filter((item: BurgerItem | any) => {
         return item.type === "sauce";
     })
 
-    const NOVICE: BurgerData[] = data.filter((item: BurgerData | any) => {
+    const NOVICE: BurgerItem[] = data.filter((item: BurgerItem | any) => {
         return item.type === "main";
     })
 

@@ -4,8 +4,8 @@ import {Button, ConstructorElement, CurrencyIcon, DragIcon} from "@ya.praktikum/
 import withModal from "../hocs/with-modal";
 import OrderDetails from "../details-order/order-details";
 import {AppContext} from "../../service/app-context";
-import {BurgerData} from "../app/app";
 import {OrderDetailsContext} from '../../service/burger-context';
+import {BurgerItem} from "../app/app";
 
 
 interface IBurgerConstructorState {
@@ -20,11 +20,11 @@ export default function BurgerConstructor() {
         isVisible: false
     });
 
-    const BUN: BurgerData[] = data.filter((item: BurgerData | any) => {
+    const BUN: BurgerItem[] = data.filter((item: BurgerItem | any) => {
         return item.type === "bun";
     }).slice(0, 1);
 
-    const INGREDIENTS: BurgerData[] = data.filter((item: BurgerData | any) => {
+    const INGREDIENTS: BurgerItem[] = data.filter((item: BurgerItem | any) => {
         return item.type !== "bun";
     });
 
@@ -52,8 +52,8 @@ export default function BurgerConstructor() {
 
     const burger = BUN.concat(INGREDIENTS);
 
-    function calculateOrder(burger: BurgerData[]) {
-        return burger.reduce((result: number, currValue: BurgerData | any) => {
+    function calculateOrder(burger: BurgerItem[]) {
+        return burger.reduce((result: number, currValue: BurgerItem | any) => {
             return result + currValue.price;
         }, 0)
     }
@@ -76,7 +76,7 @@ export default function BurgerConstructor() {
                     </div>
                     <div className={styles.ingredientList + " mb-1 mt-1"}>
                         <ul className={styles.list}>
-                            {INGREDIENTS.map((item: BurgerData | any, index: number) => (
+                            {INGREDIENTS.map((item: BurgerItem | any, index: number) => (
                                 <li key={'novice_item_' + index} className={styles.item}>
                                     <div className={styles.drag}>
                                         <DragIcon type={"primary"}/>

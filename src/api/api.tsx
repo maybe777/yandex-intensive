@@ -12,9 +12,6 @@ export async function makeRequest(url: string) {
                 throw new Error("Loading error.")
             }
         })
-        .catch(e => {
-            console.log(e)
-        });
 }
 
 export async function fetchOrder(url: string, requestBody: any) {
@@ -36,8 +33,5 @@ export async function fetchOrder(url: string, requestBody: any) {
             } else {
                 throw new Error("Loading error.")
             }
-        })
-        .catch(e => {
-            console.log(e)
         })
 }

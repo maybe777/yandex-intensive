@@ -2,8 +2,8 @@ import React, {useContext, useEffect, useState} from "react";
 import styles from './order-details.module.css'
 import approve from '../../images/done.png'
 import {OrderDetailsContext} from "../../service/burger-context";
-import {BurgerData} from "../app/app";
 import ErrorHandler from "../error/error-handler";
+import {BASE_URL, BurgerItem, checkResponse} from "../app/app";
 
 
 interface OrderDetailsState {
@@ -17,7 +17,7 @@ export default function OrderDetails() {
 
     const burger = useContext(OrderDetailsContext);
 
-    const requestBody = burger.map((item: BurgerData | any, index) => {
+    const requestBody = burger.map((item: BurgerItem | any, index) => {
         return item._id
     })
 
@@ -36,7 +36,7 @@ export default function OrderDetails() {
         number: ""
     });
 
-    const URL = "https://norma.nomoreparties.space/api/orders";
+    const URL = BASE_URL + "/orders";
 
     const fetchOrder = async () => {
         setState({...state, isLoading: true});
@@ -48,7 +48,7 @@ export default function OrderDetails() {
             },
             body: JSON.stringify({ingredients: requestBody})
         })
-            .then(res => res.json())
+            .then(checkResponse)
             .then(data => {
                 if (data.success === true) {
                     setState({...state, isLoading: false, number: data.order.number})
