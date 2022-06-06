@@ -1,35 +1,38 @@
 import React from "react";
-import {BurgerItem} from "../app/app";
+import { useSelector } from "react-redux";
 import styles from './ingredient-details.module.css'
 
 
-export default function IngredientDetails(props: BurgerItem) {
+export default function IngredientDetails() {
+
+    //@ts-ignore
+    const item = useSelector(store => store.details.item);
 
     return (
         <div className={styles.container}>
             <div className={styles.picture + " mt-5"}>
-                <img className={styles.img} src={props.image_large} alt={"Image detail"}/>
+                <img className={styles.img} src={item.image_large} alt={"Image detail"}/>
             </div>
             <div className={styles.title}>
                 <p className="text text_type_main-medium title">
-                    {props.name}
+                    {item.name}
                 </p>
             </div>
             <div className={styles.prop1 + " mt-3"}>
                 <p className="text text_type_main-default text_color_inactive">Калории, ккал</p>
-                <p className="text text_type_digits-default text_color_inactive">{props.calories}</p>
+                <p className="text text_type_digits-default text_color_inactive">{item.calories}</p>
             </div>
             <div className={styles.prop2 + " mt-3"}>
                 <p className="text text_type_main-default text_color_inactive">Белки, г</p>
-                <p className="text text_type_digits-default text_color_inactive">{props.proteins}</p>
+                <p className="text text_type_digits-default text_color_inactive">{item.proteins}</p>
             </div>
             <div className={styles.prop3 + " mt-3"}>
                 <p className="text text_type_main-default text_color_inactive">Жиры, г</p>
-                <p className="text text_type_digits-default text_color_inactive">{props.fat}</p>
+                <p className="text text_type_digits-default text_color_inactive">{item.fat}</p>
             </div>
             <div className={styles.prop4 + " mt-3"}>
                 <p className="text text_type_main-default text_color_inactive">Углеводы, г</p>
-                <p className="text text_type_digits-default text_color_inactive">{props.carbohydrates}</p>
+                <p className="text text_type_digits-default text_color_inactive">{item.carbohydrates}</p>
             </div>
         </div>
     );

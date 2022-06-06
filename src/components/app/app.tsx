@@ -1,82 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import './app.module.css';
-import AppHeader from "../header/app-header";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
+import React from 'react'
+import './app.module.css'
+import AppHeader from "../header/app-header"
+import BurgerIngredients from "../burger-ingredients/burger-ingredients"
+import BurgerConstructor from "../burger-constructor/burger-constructor"
 import styles from './app.module.css'
-import ErrorHandler from "../error/error-handler";
+import ErrorHandler from "../error/error-handler"
+import {useSelector} from "react-redux"
+import {DndProvider} from "react-dnd"
+import {HTML5Backend} from "react-dnd-html5-backend"
 
-
-export type BurgerData = {
-    _id: string,
-    name: string,
-    type: string,
-    proteins: number,
-    fat: number,
-    carbohydrates: number,
-    calories: number,
-    price: number,
-    image: string,
-    image_mobile: string,
-    image_large: string,
-    __v: number
-}[]
-
-export type BurgerItem = {
-    _id: string,
-    name: string,
-    type?: String,
-    proteins: number,
-    fat: number,
-    carbohydrates: number,
-    calories: number,
-    price: number,
-    image: string,
-    image_mobile: string,
-    image_large: string,
-    __v: number
-}
-
-interface MainState {
-    isLoading?: Boolean,
-    isError?: Boolean,
-    visible?: Boolean,
-    data: BurgerData[]
-}
 
 function App() {
 
-    const URL = "https://norma.nomoreparties.space/api/ingredients"
+    // @ts-ignore
+    const dataFailed = useSelector((store: IInitState) => store.ingredients.dataFailed);
 
-    const [state, setState] = useState<MainState>({
-        isLoading: false,
-        isError: false,
-        visible: false,
-        data: []
-    });
-
-    useEffect(() => {
-        fetchData().then(r => console.log("Data loading success."));
-    }, [])
-
-    const fetchData = async () => {
-        setState({...state, isLoading: true});
-        await fetch(URL)
-            .then(res => res.json())
-            .then(data => {
-                if (data.success === true) {
-                    setState({...state, isLoading: false, data: data.data})
-                } else {
-                    throw new Error("Loading error.")
-                }
-            })
-            .catch(e => {
-                console.log(e)
-                setState({...state, isLoading: false, isError: true})
-            })
-    }
-
-    if (state.isError === true) {
+    if (dataFailed) {
         return (
             <div className={styles.container}>
                 <ErrorHandler/>
@@ -89,8 +28,10 @@ function App() {
                 <div className={styles.topic}>
                     <h1>Соберите бургер</h1>
                 </div>
-                <BurgerIngredients data={state.data}/>
-                <BurgerConstructor data={state.data}/>
+                <DndProvider backend={HTML5Backend}>
+                    <BurgerIngredients/>
+                    <BurgerConstructor/>
+                </DndProvider>
             </div>
         );
     }

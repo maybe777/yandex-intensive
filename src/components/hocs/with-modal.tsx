@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import styles from "./with-modal.module.css";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
+import {closeDetails} from "../../redux/actions/details-actions";
+import {useDispatch} from "react-redux";
 
 
 const withModal = (WrappedComponent: any) => (props: any) => {
@@ -11,12 +13,16 @@ const withModal = (WrappedComponent: any) => (props: any) => {
 
         const modalRef = useRef<HTMLDivElement>(null);
 
+        const dispatch = useDispatch();
+
         useEffect(() => {
             let handler = (event: any) => {
                 if (modalRef.current != null) {
                     if (!modalRef.current.contains(event.target)) {
                         console.log(event.keyCode)
                         setIsOpen(!isOpen)
+                        //@ts-ignore
+                        dispatch(closeDetails)
                     }
                 }
             }
@@ -32,6 +38,8 @@ const withModal = (WrappedComponent: any) => (props: any) => {
                     if (event.keyCode === 27) {
                         console.log(event.keyCode)
                         setIsOpen(!isOpen)
+                        //@ts-ignore
+                        dispatch(closeDetails)
                     }
                 }
             }

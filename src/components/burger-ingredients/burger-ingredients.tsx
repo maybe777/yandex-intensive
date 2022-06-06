@@ -1,65 +1,109 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './burger-ingredients.module.css'
-import IngredientNav from "../ingredient-nav/ingredient-nav";
-import {BurgerData} from "../app/app";
 import IngredientDetails from "../details-ingredient/ingredient-details";
 import withModal from "../hocs/with-modal";
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
+import {useDispatch, useSelector} from "react-redux";
+import {closeDetails, showDetails} from "../../redux/actions/details-actions";
+import {getData} from "../../redux/actions/ingredients-actions";
+import {elementCalculator} from "../../service/scroll-calcuator";
+import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 
 
-interface BurgerIngredientsProps {
-    data: BurgerData[];
-}
+export default function BurgerIngredients() {
 
-interface IBurgerIngredientsState {
-    isVisible?: Boolean,
-    item: String
-}
+    // @ts-ignore
+    const data = useSelector(store => store.ingredients.data)
+    // @ts-ignore
+    const items = useSelector(store => store.burger.items)
 
-export default function BurgerIngredients(props: BurgerIngredientsProps) {
+    const [scrollIndex, setScrollIndex] = useState<Number>(0)
 
     const [state, setState] = useState<IBurgerIngredientsState>({
         isVisible: false,
         item: ''
     })
 
-    function openModal(id: string) {
-        setState({...state, isVisible: true, item: id})
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        // @ts-ignore
+        dispatch(getData())
+    }, [dispatch])
+
+    useEffect(() => {
+        let component: HTMLElement | null = document.getElementById('items')
+        const handler = (event: any) => {
+            let index = elementCalculator(
+                // @ts-ignore
+                component.scrollTop,
+                ALL,
+                0,
+                ALL.length - 1
+            );
+            setScrollIndex(index)
+        };
+        // @ts-ignore
+        component.addEventListener("scroll", handler);
+        return () => {
+            // @ts-ignore
+            component.removeEventListener("scroll", handler);
+        };
+    }, []);
+
+    const bunRef = useRef(null)
+    const sauceRef = useRef(null)
+    const noviceRef = useRef(null)
+
+    function openModal(item: any) {
+        // @ts-ignore
+        dispatch(showDetails(item))
+        setState({...state, isVisible: true})
     }
 
     function closeModal() {
         setState({...state, isVisible: false})
+        // @ts-ignore
+        dispatch(closeDetails)
     }
 
-    const BUNS = props.data.filter((item) => {
-        // @ts-ignore
+    const BUNS: BurgerItem[] = data.filter((item: BurgerItem | any) => {
         return item.type === "bun";
     })
 
-    const SAUCE = props.data.filter((item) => {
-        // @ts-ignore
+    const SAUCE: BurgerItem[] = data.filter((item: BurgerItem | any) => {
         return item.type === "sauce";
     })
 
-    const NOVICE = props.data.filter((item) => {
-        // @ts-ignore
+    const NOVICE: BurgerItem[] = data.filter((item: BurgerItem | any) => {
         return item.type === "main";
     })
 
-    const ALL = [{title: 'Булки', data: BUNS}, {title: 'Соусы', data: SAUCE}, {title: 'Начинки', data: NOVICE}];
+    const ALL: IHeaderData[] = [
+        {title: 'Булки', data: BUNS, ref: bunRef},
+        {title: 'Соусы', data: SAUCE, ref: sauceRef},
+        {title: 'Начинки', data: NOVICE, ref: noviceRef}
+    ];
 
     const WithModal = withModal(IngredientDetails);
 
-    const catalog = ALL.map((category, index) => (
-        <div key={category.title} className={styles.category}>
+    const itemsCount = (item: BurgerItem) => {
+        //@ts-ignore
+        let result = items.filter(cnt => cnt._id === item._id)
+        return result.length
+    }
+
+    const catalog = ALL.map((category: IHeaderData, index) => (
+        <div className={styles.category} key={"category_key_" + index}>
             <div className={styles.categoryTitle}>
-                <h2>{category.title}</h2>
+                <h2 ref={category.ref}>{category.title}</h2>
             </div>
-            {category.data.map((item: any) => (
-                <div key={item._id} className={styles.ingredient + " mb-3"} onClick={() => {
-                    openModal(item)
-                }}>
-                    <BurgerIngredient {...item} />
+            {category.data.map((item: BurgerItem) => (
+                <div key={"item_" + item._id} className={styles.ingredient + " mb-3"}
+                     onClick={() => {
+                         openModal(item)
+                     }}>
+                    <BurgerIngredient item={item} count={itemsCount(item)}/>
                 </div>
             ))}
         </div>
@@ -67,9 +111,16 @@ export default function BurgerIngredients(props: BurgerIngredientsProps) {
 
     return (
         <div className={styles.ingredientWrapper}>
-            <IngredientNav/>
+            <div className={styles.navigationContainer + " mb-3"}>
+                {ALL.map((item, index) =>
+                    // @ts-ignore
+                    (<Tab key={"tab_" + index} value={item.title} active={scrollIndex === index}
+                          onClick={() => console.log('Clicked')}>
+                        {item.title}
+                    </Tab>))}
+            </div>
             <WithModal isOpen={state.isVisible} onClose={closeModal} header={"Детали ингредиента"} {...state.item}/>
-            <div className={styles.ingredients}>
+            <div id="items" className={styles.ingredients}>
                 {catalog}
             </div>
         </div>
