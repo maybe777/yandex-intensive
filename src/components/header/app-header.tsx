@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {ListIcon, Logo, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './app-header.module.css';
+import {NavLink} from 'react-router-dom';
 
 
 interface MainState {
@@ -39,17 +40,27 @@ export default function AppHeader() {
                 <ul className={"mr-5 mt-2 mb-2 p-0"}>
                     <li>
                         <BurgerIcon type={state.isHoverConstr ? "primary" : "secondary"}/>
-                        <a onMouseEnter={hoverHandlerConstr} onMouseOut={hoverHandlerConstr} href={"#"}>
+                        <NavLink
+                            className={styles.link}
+                            activeClassName={styles.active}
+                            to={'/'}
+                            onMouseEnter={hoverHandlerConstr} onMouseOut={hoverHandlerConstr}
+                            exact>
                             &nbsp;Конструктор
-                        </a>
+                        </NavLink>
                     </li>
                 </ul>
                 <ul className={"mr-5 mt-2 mb-2 p-0"}>
                     <li>
                         <ListIcon type={state.isHoverFeed ? "primary" : "secondary"}/>
-                        <a onMouseEnter={hoverHandlerFeed} onMouseOut={hoverHandlerFeed} href={"#"}>
+                        <NavLink
+                            className={styles.link}
+                            activeClassName={styles.active}
+                            to={'/qwe'}
+                            onMouseEnter={hoverHandlerFeed} onMouseOut={hoverHandlerFeed}
+                            exact>
                             &nbsp;Лента заказов
-                        </a>
+                        </NavLink>
                     </li>
                 </ul>
             </nav>
@@ -60,9 +71,14 @@ export default function AppHeader() {
                 <ul>
                     <li>
                         <ProfileIcon type={state.isHoverProfile ? "primary" : "secondary"}/>
-                        <a onMouseEnter={hoverHandlerProfile} onMouseOut={hoverHandlerProfile} href={"#"}>
+                        <NavLink
+                            className={styles.link}
+                            activeClassName={styles.active}
+                            to={'/profile'}
+                            onMouseEnter={hoverHandlerProfile} onMouseOut={hoverHandlerProfile}
+                            exact>
                             &nbsp;Личный кабинет
-                        </a>
+                        </NavLink>
                     </li>
                 </ul>
             </nav>

@@ -1,40 +1,81 @@
 import React from 'react'
-import './app.module.css'
-import AppHeader from "../header/app-header"
-import BurgerIngredients from "../burger-ingredients/burger-ingredients"
-import BurgerConstructor from "../burger-constructor/burger-constructor"
-import styles from './app.module.css'
-import ErrorHandler from "../error/error-handler"
-import {useSelector} from "react-redux"
-import {DndProvider} from "react-dnd"
-import {HTML5Backend} from "react-dnd-html5-backend"
+import MainPage from "../../pages/main/main"
+import {Switch, Route, useLocation, useHistory, useParams} from 'react-router-dom'
+import {LoginPage} from "../../pages/login/login";
+import {RegisterPage} from "../../pages/register/register";
+import {Error404Page} from "../../pages/error404/Error404";
+import {ProfilePage} from "../../pages/profile/profile";
+import {PasswordResetPage} from "../../pages/password-reset/password-reset";
+import {PasswordForgotPage} from "../../pages/password-forgot/password-forgot";
+import IngredientDetails from "../details-ingredient/ingredient-details";
+import styles from "./app.module.css";
+import AppHeader from "../header/app-header";
+import {ProtectedRoute} from "../protected-route/protected-route";
+import {AuthRoute} from "../../authorized-route/authorized-route";
+import Modal from "../modal/modal";
+import {useDispatch} from "react-redux";
+import {showDetails} from "../../redux/actions/details-actions";
 
 
 function App() {
 
-    // @ts-ignore
-    const dataFailed = useSelector((store: IInitState) => store.ingredients.dataFailed);
+    const location = useLocation()
+    const history = useHistory()
+    const dispatch = useDispatch()
 
-    if (dataFailed) {
-        return (
-            <div className={styles.container}>
-                <ErrorHandler/>
+    const params = useParams()
+
+    //@ts-ignore
+    const background = location.state && location.state.background
+
+    return (
+        <div className={styles.container}>
+            <AppHeader/>
+            <div className={styles.content}>
+                <Switch location={background || location}>
+                    <Route path={"/ingredients/:id"} exact={true}>
+                        <MainPage />
+                    </Route>
+                    <AuthRoute path={"/forgot-password"} exact={true}>
+                        <PasswordForgotPage/>
+                    </AuthRoute>
+                    <AuthRoute path={"/reset-password"} exact={true}>
+                        <PasswordResetPage/>
+                    </AuthRoute>
+                    <ProtectedRoute path={"/profile"} exact={true}>
+                        <ProfilePage/>
+                    </ProtectedRoute>
+                    <AuthRoute path={"/register"} exact={true}>
+                        <RegisterPage/>
+                    </AuthRoute>
+                    <AuthRoute path={"/login"} exact={true}>
+                        <LoginPage/>
+                    </AuthRoute>
+                    <Route path={"/"} exact={true}>
+                        <MainPage/>
+                    </Route>
+                    <Route>
+                        <Error404Page/>
+                    </Route>
+                </Switch>
+                {
+                    background && (
+                        <>
+                            <Route path='/ingredients/:id' exact={true}>
+                                <Modal
+                                    onClose={() => {
+                                        history.goBack()
+                                    }} title={"Детали ингредиента"}>
+                                    <IngredientDetails/>
+                                </Modal>
+                            </Route>
+                        </>
+                    )
+                }
             </div>
-        )
-    } else {
-        return (
-            <div className={styles.container}>
-                <AppHeader/>
-                <div className={styles.topic}>
-                    <h1>Соберите бургер</h1>
-                </div>
-                <DndProvider backend={HTML5Backend}>
-                    <BurgerIngredients/>
-                    <BurgerConstructor/>
-                </DndProvider>
-            </div>
-        );
-    }
+        </div>
+    )
+        ;
 }
 
 export default App;

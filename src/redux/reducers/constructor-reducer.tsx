@@ -22,11 +22,8 @@ const initialState = {
 };
 
 const constructorReducer = (state: IConstructorState = initialState, action: any) => {
-
     switch (action.type) {
-
         case ADD_ITEM:
-
             if (action.item.type === 'bun') {
                 return {
                     ...state,
@@ -38,32 +35,24 @@ const constructorReducer = (state: IConstructorState = initialState, action: any
                     items: [...state.items, action.item]
                 }
             }
-
         case REMOVE_ITEM:
-
             let items = [...state.items]
             items.splice(action.index, 1)
-
             return {
                 ...state,
                 items: items
             }
-
         case SORT_ITEM: {
-
             let sortedArray = [...state.items]
             sortedArray.splice(action.from, 1)
             sortedArray.splice(action.to, 0, state.items[action.from])
-
             return {
                 ...state,
                 items: sortedArray
             }
         }
-
         default:
             return state
-
     }
 }
 

@@ -14,6 +14,18 @@ nav {
     vertical-align: middle;
 }
 
+.active {
+    color: whitesmoke;
+}
+
+.link a{
+    color: #8585AD;
+}
+
+.link a:hover{
+    color: #8585AD;
+}
+
 .logo {
     flex-basis: 40%;
 }

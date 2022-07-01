@@ -18,8 +18,7 @@ interface IBurgerConstructorState {
 }
 
 interface IBurgerIngredientsState {
-    isVisible?: Boolean,
-    item: String
+    isVisible?: Boolean
 }
 
 interface IIngredientState {
@@ -56,4 +55,22 @@ interface IHeaderItems{
 type BurgerAction = {
     type: string,
     item: BurgerItem
+}
+
+interface UserCredentials{
+    user: User,
+    accessToken: String,
+    refreshToken: String
+}
+
+interface RegisterForm{
+    name: String
+    email: String,
+    password: String,
+}
+
+
+type User = {
+    email: String,
+    name: String,
 }

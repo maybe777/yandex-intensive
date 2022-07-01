@@ -1,0 +1,17 @@
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    color: #8585AD;
+    grid-column: 1;
+}
+
+.menuItem li a{
+    color: #8585AD;
+}
+
+.dark {
+    color: #8585AD;
+    opacity: 0.4;
+}

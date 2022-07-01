@@ -1,13 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from './burger-ingredients.module.css'
-import IngredientDetails from "../details-ingredient/ingredient-details";
-import withModal from "../hocs/with-modal";
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 import {useDispatch, useSelector} from "react-redux";
-import {closeDetails, showDetails} from "../../redux/actions/details-actions";
+import {showDetails} from "../../redux/actions/details-actions";
 import {getData} from "../../redux/actions/ingredients-actions";
 import {elementCalculator} from "../../service/scroll-calcuator";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
+import {useRouteMatch} from "react-router-dom";
 
 
 export default function BurgerIngredients() {
@@ -17,12 +16,9 @@ export default function BurgerIngredients() {
     // @ts-ignore
     const items = useSelector(store => store.burger.items)
 
-    const [scrollIndex, setScrollIndex] = useState<Number>(0)
+    const {url} = useRouteMatch()
 
-    const [state, setState] = useState<IBurgerIngredientsState>({
-        isVisible: false,
-        item: ''
-    })
+    const [scrollIndex, setScrollIndex] = useState<Number>(0)
 
     const dispatch = useDispatch();
 
@@ -58,13 +54,6 @@ export default function BurgerIngredients() {
     function openModal(item: any) {
         // @ts-ignore
         dispatch(showDetails(item))
-        setState({...state, isVisible: true})
-    }
-
-    function closeModal() {
-        setState({...state, isVisible: false})
-        // @ts-ignore
-        dispatch(closeDetails)
     }
 
     const BUNS: BurgerItem[] = data.filter((item: BurgerItem | any) => {
@@ -84,8 +73,6 @@ export default function BurgerIngredients() {
         {title: 'Соусы', data: SAUCE, ref: sauceRef},
         {title: 'Начинки', data: NOVICE, ref: noviceRef}
     ];
-
-    const WithModal = withModal(IngredientDetails);
 
     const itemsCount = (item: BurgerItem) => {
         //@ts-ignore
@@ -115,11 +102,11 @@ export default function BurgerIngredients() {
                 {ALL.map((item, index) =>
                     // @ts-ignore
                     (<Tab key={"tab_" + index} value={item.title} active={scrollIndex === index}
-                          onClick={() => console.log('Clicked')}>
+                          onClick={() => {
+                          }}>
                         {item.title}
                     </Tab>))}
             </div>
-            <WithModal isOpen={state.isVisible} onClose={closeModal} header={"Детали ингредиента"} {...state.item}/>
             <div id="items" className={styles.ingredients}>
                 {catalog}
             </div>

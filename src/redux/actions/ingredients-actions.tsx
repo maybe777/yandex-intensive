@@ -1,10 +1,10 @@
 import React from "react";
 import {dataRequest} from "../../api/api";
 
+
 export const GET_DATA_REQUEST = "GET_DATA_REQUEST"
 export const GET_DATA_SUCCESS = "GET_DATA_SUCCESS"
 export const GET_DATA_ERROR = "GET_DATA_ERROR"
-
 
 export function getData() {
     return function (dispatch: any) {
@@ -19,17 +19,17 @@ export function getData() {
                         payload: res
                     });
                 } else {
-                    dispatch({
-                        type: GET_DATA_ERROR
-                    });
+                    dispatch(error(""));
                 }
             })
-            .then(() => console.log("Data loading success."))
+            .then(() => console.log("Успешная загрузка данных об ингредиентах."))
             .catch(err => {
-                dispatch({
-                    type: GET_DATA_ERROR,
-                    error: err
-                });
+                dispatch(error(err));
             });
     }
+}
+
+
+function error(error: String) {
+    return {type: GET_DATA_ERROR, error}
 }

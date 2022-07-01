@@ -1,0 +1,11 @@
+.payload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    grid-column: 2;
+}
+
+.inputs li {
+    margin-bottom: 19px;
+}

@@ -2,10 +2,13 @@ import React from "react";
 import styles from './burger-ingredient.module.css'
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useDrag} from "react-dnd";
+import {Link, useLocation} from "react-router-dom";
 
 
 //@ts-ignore
 export default function BurgerIngredient({item, count}) {
+
+    const location = useLocation()
 
     const [{isDrag}, dragRef] = useDrag({
         type: "burgerItem",
@@ -15,6 +18,8 @@ export default function BurgerIngredient({item, count}) {
         })
     });
 
+    const opacity = isDrag ? 0.4 : 1
+
     const counter = () => {
         if (count > 0) {
             return (<div className={styles.counter}>{count}</div>)
@@ -23,7 +28,13 @@ export default function BurgerIngredient({item, count}) {
     }
 
     return (
-        <div ref={dragRef}>
+        <Link
+            to={{
+                pathname: '/ingredients/' + item._id,
+                state: {background: location}
+            }}
+            style={{opacity}}
+            ref={dragRef}>
             {counter()}
             <div>
                 <img src={item.image} alt={"Burger item"}/>
@@ -39,7 +50,7 @@ export default function BurgerIngredient({item, count}) {
             <div className={styles.description}>
                 <p>{item.name}</p>
             </div>
-        </div>
+        </Link>
     );
 
 }

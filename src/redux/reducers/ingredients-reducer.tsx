@@ -1,5 +1,5 @@
 import React from "react";
-import {GET_DATA_REQUEST, GET_DATA_ERROR, GET_DATA_SUCCESS} from "../actions/ingredients-actions";
+import {GET_DATA_ERROR, GET_DATA_REQUEST, GET_DATA_SUCCESS} from "../actions/ingredients-actions";
 
 
 const initialState = {
@@ -24,7 +24,6 @@ const ingredientsReducer = (state: IIngredientState = initialState, action: any)
                 data: action.payload
             }
         case GET_DATA_ERROR:
-            console.log(action.error)
             return {
                 ...state,
                 dataFailed: true,
