@@ -1,6 +1,5 @@
 import React from "react"
-import {fetchProfileData, saveProfileData} from "../../api/api";
-import {getCookieItem} from "../../service/token-service";
+import {fetchUser, saveUser} from "../../api/api";
 
 
 export const SET_USER_PROFILE_VALUE = 'SET_USER_PROFILE_VALUE'
@@ -29,7 +28,7 @@ export function editProfile(name: String, email: String) {
     //@ts-ignore
     return dispatch => {
         dispatch(request(form))
-        saveProfileData(form).then(data => {
+        saveUser(form).then(data => {
             dispatch(success(data))
         })
             .catch(err => {
@@ -55,7 +54,7 @@ export function fetchProfile() {
     //@ts-ignore
     return dispatch => {
         dispatch(request())
-        fetchProfileData().then(data => {
+        fetchUser().then(data => {
             dispatch(success(data))
         })
             .catch(err => {

@@ -1,12 +1,21 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styles from './ingredient-details.module.css'
+import {useParams} from "react-router-dom";
 
 
 export default function IngredientDetails() {
 
-    //@ts-ignore
-    const item = useSelector(store => store.details.item);
+    const { id } = useParams<{ id: string }>();
+
+    const item = useSelector((state) => {
+        // @ts-ignore
+        return state.ingredients.data.find((item) => item._id === id);
+    });
+
+    if (!item) {
+        return <div>Загрузка...</div>
+    }
 
     return (
         <div className={styles.container}>

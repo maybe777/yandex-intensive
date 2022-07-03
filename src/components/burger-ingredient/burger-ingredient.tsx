@@ -33,6 +33,7 @@ export default function BurgerIngredient({item, count}) {
                 pathname: '/ingredients/' + item._id,
                 state: {background: location}
             }}
+            className={styles.item}
             style={{opacity}}
             ref={dragRef}>
             {counter()}

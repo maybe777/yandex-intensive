@@ -1,9 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from './burger-ingredients.module.css'
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {showDetails} from "../../redux/actions/details-actions";
-import {getData} from "../../redux/actions/ingredients-actions";
 import {elementCalculator} from "../../service/scroll-calcuator";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useRouteMatch} from "react-router-dom";
@@ -16,20 +15,11 @@ export default function BurgerIngredients() {
     // @ts-ignore
     const items = useSelector(store => store.burger.items)
 
-    const {url} = useRouteMatch()
-
     const [scrollIndex, setScrollIndex] = useState<Number>(0)
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        // @ts-ignore
-        dispatch(getData())
-    }, [dispatch])
 
     useEffect(() => {
         let component: HTMLElement | null = document.getElementById('items')
-        const handler = (event: any) => {
+        const handler = () => {
             let index = elementCalculator(
                 // @ts-ignore
                 component.scrollTop,

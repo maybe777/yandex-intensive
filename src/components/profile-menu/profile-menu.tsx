@@ -1,5 +1,5 @@
-import React, {useCallback} from "react"
-import {NavLink, useHistory} from "react-router-dom";
+import React from "react"
+import {NavLink} from "react-router-dom";
 import styles from './profile-menu.module.css'
 import {useDispatch} from "react-redux";
 import {userLogout} from "../../redux/actions/auth-actions";
@@ -7,13 +7,11 @@ import {userLogout} from "../../redux/actions/auth-actions";
 export function ProfileMenu() {
 
     const dispatch = useDispatch()
-    const history = useHistory()
 
-    const logoutHandler = useCallback(() => {
+    const logoutHandler = () => {
         //@ts-ignore
         dispatch(userLogout())
-        history.push('/login')
-    }, [history, userLogout])
+    }
 
     return (
         <div className={styles.menu}>

@@ -16,7 +16,7 @@
     justify-content: center;
 }
 
-.link {
-    color: #8585AD;
-    text-decoration: none;
+.item{
+    color: #8585AD !important;
+    text-decoration: none !important;
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import {
+    GET_USER_ERROR, GET_USER_REQUEST, GET_USER_SUCCESS,
     LOGIN_ERROR,
     LOGIN_REQUEST,
     LOGIN_SUCCESS, LOGOUT_ERROR,
@@ -17,14 +18,13 @@ const initialState = {
 
     loggedIn: false,
     loggedOut: true,
+    userRequest: false,
     loginRequest: false,
     logoutRequest: false,
+    userError: false,
     loginError: false,
     logoutError: false,
-    user: {
-        name: '',
-        email: ''
-    }
+    user: null
 }
 
 export function authReducer(state = initialState, action: any) {
@@ -35,6 +35,23 @@ export function authReducer(state = initialState, action: any) {
                     ...state.form,
                     [action.field]: action.value
                 }
+            }
+        case GET_USER_REQUEST:
+            return {
+                ...state,
+                userRequest: true
+            }
+        case GET_USER_SUCCESS:
+            return {
+                ...state,
+                user: action.user,
+                userRequest: false
+            }
+        case GET_USER_ERROR:
+            return {
+                ...state,
+                userRequest: false,
+                userError: true
             }
         case LOGIN_REQUEST:
             return {
@@ -69,7 +86,7 @@ export function authReducer(state = initialState, action: any) {
                 logoutRequest: false,
                 loggedOut: true,
                 loggedIn: false,
-                user: {...initialState.user}
+                user: null
             }
         }
         case LOGOUT_ERROR: {

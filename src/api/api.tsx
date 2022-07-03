@@ -56,7 +56,7 @@ export async function fetchOrder() {
 }
 
 export async function register(form: RegisterForm) {
-    await fetch(REGISTER_URL, {
+    await fetchWithToken(REGISTER_URL, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -68,7 +68,6 @@ export async function register(form: RegisterForm) {
             name: form.name
         })
     })
-        .then(checkResponse)
         .then(data => {
             if (data.success === true) {
                 console.log("Регистрация прошла успешно.")
@@ -82,7 +81,7 @@ export async function login(email: String, password: String) {
 
     let result: UserCredentials = {user: {email: "", name: ""}, accessToken: "", refreshToken: ""}
 
-    await fetch(LOGIN_URL, {
+    await fetchWithToken(LOGIN_URL, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -93,11 +92,10 @@ export async function login(email: String, password: String) {
             password: password
         })
     })
-        .then(checkResponse)
         .then(data => {
             if (data.success === true) {
                 result = data
-                // @ts-ignore
+                //@ts-ignore
                 setCookie('accessToken', data.accessToken.split(' ')[1])
                 localStorage.setItem('refreshToken', JSON.stringify(data.refreshToken))
                 localStorage.setItem('user', JSON.stringify(data.user))
@@ -110,7 +108,7 @@ export async function login(email: String, password: String) {
 }
 
 export async function logout() {
-    await fetch(LOGOUT_URL, {
+    await fetchWithToken(LOGOUT_URL, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -120,7 +118,6 @@ export async function logout() {
             token: rToken
         })
     })
-        .then(checkResponse)
         .then(data => {
             if (data.success === true) {
                 //@ts-ignore
@@ -133,7 +130,7 @@ export async function logout() {
         })
 }
 
-export async function refreshToken(token: String) {
+export async function refreshToken() {
     await fetch(REFRESH_URL, {
         method: 'POST',
         headers: {
@@ -141,19 +138,10 @@ export async function refreshToken(token: String) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            token: token
+            token: rToken
         })
     })
         .then(checkResponse)
-        .then(data => {
-            if (data.success === true) {
-                // @ts-ignore
-                setCookie('accessToken', data.accessToken.split(' ')[1])
-                localStorage.setItem('refreshToken', JSON.stringify(data.refreshToken))
-            } else {
-                throw new Error("Обновление информации о токене не удалась. Возникла ошибка.")
-            }
-        })
 }
 
 export async function passwordForgot(email: String) {
@@ -205,16 +193,15 @@ export async function passwordReset(password: String, token: String) {
                 throw new Error("Сброс пароля не удался. Возникла ошибка.")
             }
         })
-
     return result
 }
 
-export async function fetchProfileData() {
+export async function fetchUser() {
     let result: User = {name: "", email: ""}
 
     let token = getCookieItem('accessToken')
 
-    await fetch(PROFILE, {
+    await fetchWithToken(PROFILE, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -222,7 +209,6 @@ export async function fetchProfileData() {
             'Authorization': 'Bearer ' + token
         },
     })
-        .then(checkResponse)
         .then(data => {
             if (data.success === true) {
                 result = data.user
@@ -234,12 +220,12 @@ export async function fetchProfileData() {
     return result
 }
 
-export async function saveProfileData(form: User) {
+export async function saveUser(form: User) {
 
     let token = getCookieItem('accessToken')
 
     let result: User = {name: "", email: ""}
-    await fetch(PROFILE, {
+    await fetchWithToken(PROFILE, {
         method: 'PATCH',
         headers: {
             'Accept': 'application/json',
@@ -251,7 +237,6 @@ export async function saveProfileData(form: User) {
             name: form.name
         })
     })
-        .then(checkResponse)
         .then(data => {
             if (data.success === true) {
                 result = data.user
@@ -271,6 +256,12 @@ export function checkResponse(res: Response) {
 }
 
 export function setCookie(name: String, value: any, props: any) {
+
+    props = {
+        path: '/',
+        ...props
+    }
+
     props = props || {};
     let exp = props.expires;
     if (typeof exp == 'number' && exp) {
@@ -298,5 +289,26 @@ export function getCookie(name: String) {
         new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
     );
     return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+async function fetchWithToken(url: any, options: any) {
+    try {
+        const result = await fetch(url, options)
+        return await checkResponse(result)
+    } catch (err: any) {
+        if (err.message === 'jwt expired') {
+            const refreshData: any = await refreshToken();
+            if (!refreshData.success) {
+                Promise.reject(refreshData).then(() => console.log('Не удалось обновить токен.'))
+            }
+            localStorage.setItem("refreshToken", refreshData.refreshToken)
+            // @ts-ignore
+            setCookie('accessToken', refreshData.accessToken)
+            const res = await fetch(url, options)
+            return await checkResponse(res)
+        } else {
+            return Promise.reject((err))
+        }
+    }
 }
 
