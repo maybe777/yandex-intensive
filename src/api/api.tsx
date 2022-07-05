@@ -161,7 +161,7 @@ export async function passwordForgot(email: String) {
         .then(checkResponse)
         .then(data => {
             if (data.success === true) {
-                result = data.success
+                result = true
             } else {
                 throw new Error("Запрос на сброс пароля не удался. Возникла ошибка.")
             }

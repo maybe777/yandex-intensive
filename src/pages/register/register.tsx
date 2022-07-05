@@ -36,18 +36,21 @@ export function RegisterPage() {
                 <li>
                     <h2>Регистрация</h2>
                 </li>
-                <li>
-                    <Input name="name" value={name} placeholder="Имя" onChange={onChange}/>
-                </li>
-                <li>
-                    <Input name="email" value={email} placeholder="E-mail" onChange={onChange}/>
-                </li>
-                <li>
-                    <Input name="password" value={password} placeholder="Пароль" icon={'HideIcon'} onChange={onChange}/>
-                </li>
-                <li>
-                    <Button type="primary" size="large" onClick={registration}>Зарегистрироваться</Button>
-                </li>
+                <form className={styles.registerForm} onSubmit={registration}>
+                    <li>
+                        <Input name="name" value={name} placeholder="Имя" onChange={onChange}/>
+                    </li>
+                    <li>
+                        <Input name="email" value={email} placeholder="E-mail" onChange={onChange}/>
+                    </li>
+                    <li>
+                        <Input name="password" value={password} placeholder="Пароль" icon={'HideIcon'}
+                               onChange={onChange}/>
+                    </li>
+                    <li>
+                        <Button type="primary" size="large">Зарегистрироваться</Button>
+                    </li>
+                </form>
                 <li>
                     <p className="mt-9">Уже зарегистрированы?&nbsp; <Link to={'/login'}>Войти</Link></p>
                 </li>

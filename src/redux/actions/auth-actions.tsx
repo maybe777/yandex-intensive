@@ -30,27 +30,27 @@ export function getUser() {
 
     //@ts-ignore
     return dispatch => {
-        dispatch(request());
+        dispatch(getUserRequest());
 
         fetchUser()
             .then(user => {
                 //@ts-ignore
-                dispatch(success(user))
+                dispatch(getUserSuccess(user))
             }).catch(
             err => {
-                dispatch(error(err))
+                dispatch(getUserError(err))
             });
     }
 
-    function request() {
+    function getUserRequest() {
         return {type: GET_USER_REQUEST}
     }
 
-    function success(user: User) {
+    function getUserSuccess(user: User) {
         return {type: GET_USER_SUCCESS, user}
     }
 
-    function error(error: String) {
+    function getUserError(error: String) {
         return {type: LOGIN_ERROR, error}
     }
 }
@@ -58,27 +58,27 @@ export function getUser() {
 export function userLogin(email: String, password: String) {
     //@ts-ignore
     return dispatch => {
-        dispatch(request(email));
+        dispatch(loginRequest(email));
 
         login(email, password)
             .then(data => {
                 //@ts-ignore
-                dispatch(success(data.user));
+                dispatch(loginSuccess(data.user));
             }).catch(
             err => {
-                dispatch(error(err))
+                dispatch(loginError(err))
             });
     }
 
-    function request(email: String) {
+    function loginRequest(email: String) {
         return {type: LOGIN_REQUEST, email}
     }
 
-    function success(user: User) {
+    function loginSuccess(user: User) {
         return {type: LOGIN_SUCCESS, user}
     }
 
-    function error(error: String) {
+    function loginError(error: String) {
         return {type: LOGIN_ERROR, error}
     }
 }
@@ -86,26 +86,22 @@ export function userLogin(email: String, password: String) {
 export function userLogout() {
     //@ts-ignore
     return dispatch => {
-        dispatch(request)
+        dispatch({type: LOGOUT_REQUEST})
 
         logout()
             .then(() => {
-                dispatch(success())
+                dispatch(logoutSuccess())
             })
             .catch(err => {
-                dispatch(error(err))
+                dispatch(logoutError(err))
             })
     }
 
-    function request() {
-        return {type: LOGOUT_REQUEST}
-    }
-
-    function success() {
+    function logoutSuccess() {
         return {type: LOGOUT_SUCCESS}
     }
 
-    function error(error: String) {
+    function logoutError(error: String) {
         return {type: LOGOUT_ERROR, error}
     }
 }

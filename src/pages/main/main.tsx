@@ -1,13 +1,11 @@
-import React from 'react'
-import {useSelector} from "react-redux";
+import React, {useEffect} from 'react'
+import {useDispatch, useSelector} from "react-redux";
 import styles from "./main.module.css";
 import ErrorHandler from "../../components/error/error-handler";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
-
-
 export default function MainPage(){
 
     // @ts-ignore

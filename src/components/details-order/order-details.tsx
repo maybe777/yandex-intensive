@@ -31,14 +31,14 @@ export default function OrderDetails() {
         )
     } else {
         return (
-            <div className={styles.details}>
-                <p className="text text_type_digits-large pt-4">{orderNumber}</p>
-                <p className="text text_type_main-medium pt-5">идентификатор заказа</p>
-                <p className="mt-15"><img src={approve} alt={"Order approval image"}/></p>
-                <p className="text text_type_main-default mt-10">Ваш заказ начали готовить</p>
-                <p className="text text_type_main-default mt-2"><span style={{color: '#8585AD'}}>Дождитесь готовности на орбитальной станции</span>
-                </p>
-            </div>);
+                <div className={styles.details}>
+                    <p className="text text_type_digits-large pt-4">{orderNumber}</p>
+                    <p className="text text_type_main-medium pt-5">идентификатор заказа</p>
+                    <p className="mt-15"><img src={approve} alt={"Order approval image"}/></p>
+                    <p className="text text_type_main-default mt-10">Ваш заказ начали готовить</p>
+                    <p className="text text_type_main-default mt-2"><span style={{color: '#8585AD'}}>Дождитесь готовности на орбитальной станции</span>
+                    </p>
+                </div>)
     }
 
 }

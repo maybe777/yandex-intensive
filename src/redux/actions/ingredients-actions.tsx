@@ -19,17 +19,17 @@ export function getData() {
                         payload: res
                     });
                 } else {
-                    dispatch(error(""));
+                    dispatch(getDataError(""));
                 }
             })
             .then(() => console.log("Успешная загрузка данных об ингредиентах."))
             .catch(err => {
-                dispatch(error(err));
+                dispatch(getDataError(err));
             });
     }
 }
 
 
-function error(error: String) {
+function getDataError(error: String) {
     return {type: GET_DATA_ERROR, error}
 }

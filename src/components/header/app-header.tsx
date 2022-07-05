@@ -2,7 +2,7 @@ import React from 'react';
 import {ListIcon, Logo, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './app-header.module.css';
-import {NavLink, useRouteMatch} from 'react-router-dom';
+import {NavLink, Link, useRouteMatch} from 'react-router-dom';
 
 
 export default function AppHeader() {
@@ -40,7 +40,9 @@ export default function AppHeader() {
                 </ul>
             </nav>
             <div className={styles.logo}>
-                <Logo/>
+                <Link to={'/'}>
+                    <Logo/>
+                </Link>
             </div>
             <nav>
                 <ul>

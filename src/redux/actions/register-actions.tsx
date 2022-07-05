@@ -27,26 +27,26 @@ export function userRegister(name: String, email: String, password: String) {
 
     //@ts-ignore
     return dispatch => {
-        dispatch(request(form));
+        dispatch(registerRequest(form));
 
         register(form)
             .then(() => {
-                dispatch(success())
+                dispatch(registerSuccess())
             })
             .catch(err => {
-                dispatch(error(err))
+                dispatch(registerError(err))
             });
     }
 
-    function request(form: RegisterForm) {
+    function registerRequest(form: RegisterForm) {
         return {type: REGISTER_REQUEST, form}
     }
 
-    function success() {
+    function registerSuccess() {
         return {type: REGISTER_SUCCESS}
     }
 
-    function error(error: String) {
+    function registerError(error: String) {
         return {type: REGISTER_ERROR, error}
     }
 }

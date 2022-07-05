@@ -8,6 +8,7 @@ import {addItem} from "../../redux/actions/constructor-actions";
 import BurgerConstructorItem from "../burger-constructor-item/burger-constructor-item";
 import ChiefCook from "../chief-cook/chief-cook";
 import Modal from "../modal/modal";
+import {Link, useLocation} from 'react-router-dom';
 
 
 export default function BurgerConstructor() {
@@ -15,6 +16,8 @@ export default function BurgerConstructor() {
     const data = useSelector((store: any) => store.burger.items)
 
     const dispatch = useDispatch();
+
+    const location = useLocation()
 
     const [isVisible, setIsVisible] = useState(false)
 
@@ -107,7 +110,13 @@ export default function BurgerConstructor() {
                     <span className={"text text_type_digits-medium"}>{calculateOrder(burger)}</span>
                     <span className={styles.currency}> <CurrencyIcon type={"primary"}/></span>
                 </div>
-                <Button type={"primary"} size={"large"} onClick={openModal}>Оформить заказ</Button>
+                <Link
+                    to={{
+                        pathname: '/order',
+                        state: {background: location}
+                    }}>
+                    <Button type={"primary"} size={"large"} onClick={openModal}>Оформить заказ</Button>
+                </Link>
                 {isVisible && (
                     <Modal onClose={closeModal} title="">
                         <OrderDetails/>

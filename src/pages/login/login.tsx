@@ -35,15 +35,18 @@ export function LoginPage() {
                 <li>
                     <h2>Вход</h2>
                 </li>
-                <li>
-                    <Input value={login} name="login" placeholder="E-mail" onChange={onChange}/>
-                </li>
-                <li>
-                    <Input value={password} name="password" placeholder="Пароль" icon={'HideIcon'} onChange={onChange}/>
-                </li>
-                <li>
-                    <Button type="primary" size="large" onClick={authenticate}>Войти</Button>
-                </li>
+                <form className={styles.loginForm} onSubmit={authenticate}>
+                    <li>
+                        <Input value={login} name="login" placeholder="E-mail" onChange={onChange}/>
+                    </li>
+                    <li>
+                        <Input value={password} name="password" placeholder="Пароль" icon={'HideIcon'}
+                               onChange={onChange}/>
+                    </li>
+                    <li>
+                        <Button type="primary" size="large">Войти</Button>
+                    </li>
+                </form>
             </ul>
             <ul className={styles.loginCreds}>
                 <li>

@@ -14,7 +14,7 @@ import {ProtectedRoute} from "../protected-route/protected-route";
 import Modal from "../modal/modal";
 import {useDispatch} from "react-redux";
 import {getData} from "../../redux/actions/ingredients-actions";
-import {getUser} from "../../redux/actions/auth-actions";
+import OrderDetails from "../details-order/order-details";
 
 
 function App() {
@@ -26,8 +26,6 @@ function App() {
     useEffect(() => {
         // @ts-ignore
         dispatch(getData())
-        // @ts-ignore
-        dispatch(getUser())
     }, [dispatch])
 
     //@ts-ignore
@@ -38,9 +36,9 @@ function App() {
             <AppHeader/>
             <div className={styles.content}>
                 <Switch location={background || location}>
-                    <ProtectedRoute isAuthOnly={true} path={"/ingredients/:id"} exact={true}>
+                    <Route path={"/ingredients/:id"} exact={true}>
                         <IngredientDetails/>
-                    </ProtectedRoute>
+                    </Route>
                     <ProtectedRoute path={"/forgot-password"} exact={true}>
                         <PasswordForgotPage/>
                     </ProtectedRoute>
@@ -53,7 +51,7 @@ function App() {
                     <ProtectedRoute path={"/register"} exact={true}>
                         <RegisterPage/>
                     </ProtectedRoute>
-                    <ProtectedRoute  path={"/login"} exact={true}>
+                    <ProtectedRoute path={"/login"} exact={true}>
                         <LoginPage/>
                     </ProtectedRoute>
                     <Route path={"/"} exact={true}>
@@ -74,6 +72,14 @@ function App() {
                                     <IngredientDetails/>
                                 </Modal>
                             </Route>
+                            <ProtectedRoute isAuthOnly={true} path='/order'  exact={true}>
+                                <Modal
+                                    onClose={() => {
+                                        history.goBack()
+                                    }} title={""}>
+                                    <OrderDetails/>
+                                </Modal>
+                            </ProtectedRoute>
                         </>
                     )
                 }

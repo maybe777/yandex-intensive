@@ -27,24 +27,24 @@ export function editProfile(name: String, email: String) {
 
     //@ts-ignore
     return dispatch => {
-        dispatch(request(form))
+        dispatch(editProfileRequest(form))
         saveUser(form).then(data => {
-            dispatch(success(data))
+            dispatch(editProfileSuccess(data))
         })
             .catch(err => {
-                dispatch(error(err))
+                dispatch(editProfileError(err))
             })
     }
 
-    function request(form: User) {
+    function editProfileRequest(form: User) {
         return {type: USER_PROFILE_REQUEST, form}
     }
 
-    function success(profile: User) {
+    function editProfileSuccess(profile: User) {
         return {type: USER_PROFILE_SUCCESS, profile}
     }
 
-    function error(error: String) {
+    function editProfileError(error: String) {
         return {type: USER_PROFILE_ERROR, error}
     }
 }
@@ -53,24 +53,24 @@ export function fetchProfile() {
 
     //@ts-ignore
     return dispatch => {
-        dispatch(request())
+        dispatch(fetchProfileRequest())
         fetchUser().then(data => {
-            dispatch(success(data))
+            dispatch(fetchProfileSuccess(data))
         })
             .catch(err => {
-                dispatch(error(err))
+                dispatch(fetchProfileError(err))
             })
     }
 
-    function request() {
+    function fetchProfileRequest() {
         return {type: USER_PROFILE_REQUEST}
     }
 
-    function success(profile: User) {
+    function fetchProfileSuccess(profile: User) {
         return {type: USER_PROFILE_SUCCESS, profile}
     }
 
-    function error(error: String) {
+    function fetchProfileError(error: String) {
         return {type: USER_PROFILE_ERROR, error}
     }
 }

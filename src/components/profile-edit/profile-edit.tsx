@@ -19,7 +19,7 @@ export function ProfileEdit() {
     useEffect(() => {
         //@ts-ignore
         dispatch(fetchProfile())
-    }, [fetchProfile])
+    }, [dispatch])
 
     //@ts-ignore
     const editProfileHandler = () => {
@@ -35,13 +35,17 @@ export function ProfileEdit() {
 
     return (
         <div className={styles.payload}>
-            <ul className={styles.inputs + " " + styles.payload}>
-                <li><Input value={name} name="name" placeholder="Имя" icon={'EditIcon'} onChange={onChange}/></li>
-                <li><Input value={email} name="email" placeholder="E-mail" icon={'EditIcon'} onChange={onChange}/></li>
-                <li><Input value={"******"} name="password" placeholder="Пароль" icon={'EditIcon'} onChange={onChange}/>
-                </li>
-                <li><Button type="primary" size="large" onClick={editProfileHandler}>Сохранить</Button></li>
-            </ul>
+            <form onSubmit={editProfileHandler}>
+                <ul className={styles.inputs + " " + styles.payload}>
+                    <li><Input value={name} name="name" placeholder="Имя" icon={'EditIcon'} onChange={onChange}/></li>
+                    <li><Input value={email} name="email" placeholder="E-mail" icon={'EditIcon'} onChange={onChange}/>
+                    </li>
+                    <li><Input value={"******"} name="password" placeholder="Пароль" icon={'EditIcon'}
+                               onChange={onChange}/>
+                    </li>
+                    <li><Button type="primary" size="large">Сохранить</Button></li>
+                </ul>
+            </form>
         </div>
     );
 
