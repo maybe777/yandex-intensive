@@ -2,7 +2,7 @@ import React from 'react'
 import styles from "./login.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useHistory} from 'react-router-dom'
+import {Link, useHistory, useLocation} from 'react-router-dom'
 import {setLoginFormValue, userLogin} from "../../redux/actions/auth-actions";
 
 
@@ -15,7 +15,11 @@ export function LoginPage() {
     } = useSelector(store => store.auth.form)
 
     const dispatch = useDispatch()
+    const location = useLocation();
     const history = useHistory();
+
+    //@ts-ignore
+    const dest = location?.state?.from.pathname || '/'
 
     //@ts-ignore
     const onChange = (e) => {
@@ -26,7 +30,7 @@ export function LoginPage() {
     const authenticate = () => {
         //@ts-ignore
         dispatch(userLogin(login, password))
-        history.push('/')
+        history.push(dest)
     }
 
     return (

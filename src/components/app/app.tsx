@@ -13,8 +13,10 @@ import AppHeader from "../header/app-header";
 import {ProtectedRoute} from "../protected-route/protected-route";
 import Modal from "../modal/modal";
 import {useDispatch} from "react-redux";
+import {getUser} from "../../redux/actions/auth-actions";
 import {getData} from "../../redux/actions/ingredients-actions";
 import OrderDetails from "../details-order/order-details";
+import {getLocalStorageItem} from "../../service/token-service";
 
 
 function App() {
@@ -23,9 +25,15 @@ function App() {
     const history = useHistory()
     const dispatch = useDispatch();
 
+    const loggedIn = !!getLocalStorageItem('user')
+
     useEffect(() => {
         // @ts-ignore
         dispatch(getData())
+        if (loggedIn) {
+            //@ts-ignore
+            dispatch(getUser())
+        }
     }, [dispatch])
 
     //@ts-ignore
@@ -72,7 +80,7 @@ function App() {
                                     <IngredientDetails/>
                                 </Modal>
                             </Route>
-                            <ProtectedRoute isAuthOnly={true} path='/order'  exact={true}>
+                            <ProtectedRoute isAuthOnly={true} path='/order' exact={true}>
                                 <Modal
                                     onClose={() => {
                                         history.goBack()
