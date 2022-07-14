@@ -1,12 +1,11 @@
-import React, {useEffect, useRef} from "react";
+import React, {FC, useEffect, useRef} from "react";
 import ReactDOM from "react-dom";
 import styles from "./modal.module.css";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 
 
-//@ts-ignore
-const Modal = ({title, onClose, children}) => {
+const Modal: FC<IModal> = ({title, onClose, children}) => {
 
     const modalRef = useRef<HTMLDivElement>(null);
 
@@ -57,8 +56,7 @@ const Modal = ({title, onClose, children}) => {
             </div>
         </>,
         // @ts-ignore
-        document.getElementById('modal')
-    );
+        document.getElementById('modal'));
 }
 
 export default Modal;

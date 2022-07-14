@@ -12,14 +12,13 @@ export function RegisterPage() {
         name,
         email,
         password
-        //@ts-ignore
-    } = useSelector(store => store.register.form)
+    } = useSelector((store: any) => store.register.form)
 
     const dispatch = useDispatch()
     const history = useHistory()
 
-    //@ts-ignore
-    const onChange = (e) => {
+
+    const onChange = (e: any) => {
         //@ts-ignore
         dispatch(setRegisterFormValue(e.target.name, e.target.value))
     }

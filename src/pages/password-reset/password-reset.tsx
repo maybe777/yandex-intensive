@@ -7,7 +7,7 @@ import {getLocalStorageItem} from "../../service/token-service";
 
 export function PasswordResetPage() {
 
-    const send = getLocalStorageItem('isSend')
+    const isSend: boolean = getLocalStorageItem('isSend')
 
     const [password, setPassword] = useState("")
     const [token, setToken] = useState("")
@@ -36,7 +36,7 @@ export function PasswordResetPage() {
         })
     }
 
-    if (!send) {
+    if (!isSend) {
         return (<Redirect to={'/forgot-password'}/>)
     }
 
