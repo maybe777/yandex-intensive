@@ -6,6 +6,10 @@ body {
     font-size: 16px;
 }
 
+h2 {
+    margin: 0;
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -14,6 +18,7 @@ code {
 ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 ul li {
@@ -35,4 +40,8 @@ ul a:hover {
     font-style: normal;
     font-weight: 700;
     src: url("./fonts/JetBrainsMono-Regular.woff2") format("woff");
+}
+
+.active{
+    color: #FCFCFC !important;
 }

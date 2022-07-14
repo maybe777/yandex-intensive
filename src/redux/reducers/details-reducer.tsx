@@ -9,10 +9,12 @@ const detailsReducer = (state: IDetailsState = initialState, action: any) => {
     switch (action.type) {
         case SHOW_DETAILS:
             return {
+                ...state,
                 item: action.item
             };
         case CLOSE_DETAILS: {
             return {
+                ...state,
                 item: null
             }
         }

@@ -1,0 +1,11 @@
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin-top: 50px;
+}
+
+.registerForm li {
+    margin-top: 18px;
+}

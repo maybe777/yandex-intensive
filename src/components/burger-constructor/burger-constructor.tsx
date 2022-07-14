@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import styles from './burger-constructor.module.css'
 import {Button, ConstructorElement, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import withModal from "../hocs/with-modal";
 import OrderDetails from "../details-order/order-details";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import {addItem} from "../../redux/actions/constructor-actions";
 import BurgerConstructorItem from "../burger-constructor-item/burger-constructor-item";
 import ChiefCook from "../chief-cook/chief-cook";
+import Modal from "../modal/modal";
+import {Link, useLocation} from 'react-router-dom';
 
 
 export default function BurgerConstructor() {
@@ -16,9 +17,9 @@ export default function BurgerConstructor() {
 
     const dispatch = useDispatch();
 
-    const [state, setState] = useState<IBurgerConstructorState>({
-        isVisible: false
-    })
+    const location = useLocation()
+
+    const [isVisible, setIsVisible] = useState(false)
 
     const [{isHover}, dropTarget] = useDrop(() => ({
         accept: "burgerItem",
@@ -73,14 +74,12 @@ export default function BurgerConstructor() {
     }
 
     function openModal() {
-        setState({...state, isVisible: true})
+        setIsVisible(true)
     }
 
     function closeModal() {
-        setState({...state, isVisible: false})
+        setIsVisible(false)
     }
-
-    const WithModal = withModal(OrderDetails)
 
     const mainStyle = isHover ? styles.main + " " + styles.onHoverMain : styles.main
 
@@ -106,13 +105,23 @@ export default function BurgerConstructor() {
                 {burgerBottom}
             </div>
 
-            <div className={styles.summary + " mr-4 mt-5 pt-5"}>
+            <div className={styles.summary + " mr-4"}>
                 <div className={"text text_type_digits-default mr-4"}>
                     <span className={"text text_type_digits-medium"}>{calculateOrder(burger)}</span>
                     <span className={styles.currency}> <CurrencyIcon type={"primary"}/></span>
                 </div>
-                <Button type={"primary"} size={"large"} onClick={openModal}>Оформить заказ</Button>
-                <WithModal isOpen={state.isVisible} onClose={closeModal}/>
+                <Link
+                    to={{
+                        pathname: '/order',
+                        state: {background: location}
+                    }}>
+                    <Button type={"primary"} size={"large"} onClick={openModal}>Оформить заказ</Button>
+                </Link>
+                {isVisible && (
+                    <Modal onClose={closeModal} title="">
+                        <OrderDetails/>
+                    </Modal>
+                )}
             </div>
         </div>
     );

@@ -1,68 +1,60 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {ListIcon, Logo, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './app-header.module.css';
+import {NavLink, Link, useRouteMatch} from 'react-router-dom';
 
-
-interface MainState {
-    isHoverConstr: Boolean;
-    isHoverFeed: Boolean,
-    isHoverProfile: Boolean
-}
 
 export default function AppHeader() {
 
-    const [state, setState] = useState<MainState>({
-        isHoverConstr: false,
-        isHoverFeed: false,
-        isHoverProfile: false
-    });
-
-    const hoverHandlerConstr = () => {
-
-        setState({...state, isHoverConstr: !state.isHoverConstr});
-    };
-
-    const hoverHandlerFeed = () => {
-
-        setState({...state, isHoverFeed: !state.isHoverFeed});
-    };
-
-    const hoverHandlerProfile = () => {
-        setState({...state, isHoverProfile: !state.isHoverProfile});
-    };
-
+    const isConstructor = !!useRouteMatch({path: '/', exact: true})
+    const isFeed = !!useRouteMatch({path: '/feed', exact: true})
+    const isProfile = !!useRouteMatch({path: '/profile', exact: true})
 
     return (
         <header className={styles.header}>
             <nav>
                 <ul className={"mr-5 mt-2 mb-2 p-0"}>
                     <li>
-                        <BurgerIcon type={state.isHoverConstr ? "primary" : "secondary"}/>
-                        <a onMouseEnter={hoverHandlerConstr} onMouseOut={hoverHandlerConstr} href={"#"}>
+                        <BurgerIcon type={isConstructor ? "primary" : "secondary"}/>
+                        <NavLink
+                            className={styles.link}
+                            activeClassName={styles.active}
+                            to={'/'}
+                            exact>
                             &nbsp;Конструктор
-                        </a>
+                        </NavLink>
                     </li>
                 </ul>
                 <ul className={"mr-5 mt-2 mb-2 p-0"}>
                     <li>
-                        <ListIcon type={state.isHoverFeed ? "primary" : "secondary"}/>
-                        <a onMouseEnter={hoverHandlerFeed} onMouseOut={hoverHandlerFeed} href={"#"}>
+                        <ListIcon type={isFeed ? "primary" : "secondary"}/>
+                        <NavLink
+                            className={styles.link}
+                            activeClassName={styles.active}
+                            to={'/feed'}
+                            exact>
                             &nbsp;Лента заказов
-                        </a>
+                        </NavLink>
                     </li>
                 </ul>
             </nav>
             <div className={styles.logo}>
-                <Logo/>
+                <Link to={'/'}>
+                    <Logo/>
+                </Link>
             </div>
             <nav>
                 <ul>
                     <li>
-                        <ProfileIcon type={state.isHoverProfile ? "primary" : "secondary"}/>
-                        <a onMouseEnter={hoverHandlerProfile} onMouseOut={hoverHandlerProfile} href={"#"}>
+                        <ProfileIcon type={isProfile ? "primary" : "secondary"}/>
+                        <NavLink
+                            className={styles.link}
+                            activeClassName={styles.active}
+                            to={'/profile'}
+                            exact>
                             &nbsp;Личный кабинет
-                        </a>
+                        </NavLink>
                     </li>
                 </ul>
             </nav>
