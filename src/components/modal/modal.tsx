@@ -10,9 +10,9 @@ const Modal: FC<IModal> = ({title, onClose, children}) => {
     const modalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        let handler = (event: any) => {
+        let handler = (e: MouseEvent) => {
             if (modalRef.current != null) {
-                if (!modalRef.current.contains(event.target)) {
+                if (!modalRef.current.contains(e.target as Node)) {
                     onClose()
                 }
             }
@@ -24,10 +24,9 @@ const Modal: FC<IModal> = ({title, onClose, children}) => {
     }, [onClose])
 
     useEffect(() => {
-        let handler = (event: any) => {
+        let handler = (e: KeyboardEvent) => {
             if (modalRef.current != null) {
-                if (event.keyCode === 27) {
-                    console.log(event.keyCode)
+                if (e.key === 'Escape') {
                     onClose()
                 }
             }

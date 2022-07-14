@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react'
+import React, {ChangeEvent, FC, useEffect} from 'react'
 import styles from "./profile-edit.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useDispatch, useSelector} from "react-redux";
@@ -26,7 +26,7 @@ export const ProfileEdit: FC = () => {
     }
 
 
-    const onChange = (e: any) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         //@ts-ignore
         dispatch(setUserProfileFormValue(e.target.name, e.target.value))
     }

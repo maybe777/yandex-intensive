@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {ChangeEvent, useState} from 'react'
 import styles from "./password-forgot.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useHistory} from "react-router-dom";
@@ -10,8 +10,8 @@ export function PasswordForgotPage() {
     const [email, setEmail] = useState("")
 
 
-    const handleEmail = (e: any) => {
-        setEmail(e.target.value)
+    const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.currentTarget.value)
     }
 
     const history = useHistory()
