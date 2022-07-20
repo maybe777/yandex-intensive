@@ -2,7 +2,7 @@ import React, {FC, useState} from 'react';
 import styles from './burger-constructor.module.css'
 import {Button, ConstructorElement, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderDetails from "../details-order/order-details";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../service/hooks";
 import {useDrop} from "react-dnd";
 import {addItem} from "../../redux/actions/constructor-actions";
 import BurgerConstructorItem from "../burger-constructor-item/burger-constructor-item";
@@ -13,7 +13,7 @@ import {Link, useLocation} from 'react-router-dom';
 
 const BurgerConstructor: FC = () => {
 
-    const data: Array<IBurgerItem> = useSelector((store: any) => store.burger.items)
+    const data: Array<IBurgerItem> = useSelector(store => store.burger.items)
 
     const dispatch = useDispatch();
 
@@ -23,8 +23,7 @@ const BurgerConstructor: FC = () => {
 
     const [{isHover}, dropTarget] = useDrop(() => ({
         accept: "burgerItem",
-        drop: (item) => {
-            // @ts-ignore
+        drop: (item: IBurgerItem) => {
             dispatch(addItem(item))
         },
         collect: monitor => ({
@@ -32,16 +31,16 @@ const BurgerConstructor: FC = () => {
         })
     }))
 
-    const BUN: Array<IBurgerItem> = data.filter((item: IBurgerItem | any) => {
+    const BUN: Array<IBurgerItem> = data.filter((item: IBurgerItem) => {
         return item.type === "bun";
     }).slice(0, 1)
 
-    const INGREDIENTS: Array<IBurgerItem> = data.filter((item: IBurgerItem | any) => {
+    const INGREDIENTS: Array<IBurgerItem> = data.filter((item: IBurgerItem) => {
         return item.type !== "bun";
     })
 
     let burgerTop = (
-        BUN.map((item: any, index: number) => (
+        BUN.map((item: IBurgerItem, index: number) => (
             <ConstructorElement key={index}
                                 text={item.name + " (верх)"}
                                 isLocked={true}
@@ -52,7 +51,7 @@ const BurgerConstructor: FC = () => {
     );
 
     let burgerBottom = (
-        BUN.map((item: any, index: number) => (
+        BUN.map((item: IBurgerItem, index: number) => (
             <ConstructorElement key={index}
                                 text={item.name + " (низ)"}
                                 isLocked={true}
@@ -65,7 +64,7 @@ const BurgerConstructor: FC = () => {
     const burger: Array<IBurgerItem> = BUN.concat(INGREDIENTS);
 
     function calculateOrder(burger: Array<IBurgerItem>): number {
-        return burger.reduce((result: number, currValue: IBurgerItem | any) => {
+        return burger.reduce((result: number, currValue: IBurgerItem) => {
             if (currValue.type === 'bun') {
                 return currValue.price * 2
             }
@@ -91,7 +90,7 @@ const BurgerConstructor: FC = () => {
             <div className={styles.ingredientList + " mb-1 mt-1"}>
                 {INGREDIENTS.length > 0 ?
                     <ul className={styles.list}>
-                        {INGREDIENTS.map((item: IBurgerItem | any, index: number) => (
+                        {INGREDIENTS.map((item: IBurgerItem, index: number) => (
                             <li key={item.__v} className={styles.item}>
                                 <BurgerConstructorItem item={item} index={index + 1}/>
                             </li>

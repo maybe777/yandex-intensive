@@ -1,14 +1,14 @@
 import styles from './order-details.module.css'
 import approve from '../../images/done.png'
 import ErrorHandler from "../error/error-handler";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../service/hooks";
 import React, {FC, useEffect} from "react";
 import {getOrder} from "../../redux/actions/order-actions";
 
 
 const OrderDetails: FC = () => {
 
-    const {orderNumber, orderFailed}: TOrderDetails = useSelector((store: any) => ({
+    const {orderNumber, orderFailed}: TOrderDetails = useSelector(store => ({
         orderNumber: store.order.number,
         orderFailed: store.order.orderFailed
     }));
@@ -16,7 +16,6 @@ const OrderDetails: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // @ts-ignore
         dispatch(getOrder())
     }, [dispatch])
 

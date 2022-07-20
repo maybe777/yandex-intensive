@@ -5,9 +5,10 @@ import {
     REGISTER_SUCCESS,
     SET_REGISTER_FORM_VALUE
 } from "../actions/register-actions";
+import {TRegisterAction} from "../types/register-actions-types";
 
 
-const initialState = {
+const initialState: IRegisterInitialState = {
     form: {
         name: '',
         email: '',
@@ -17,7 +18,7 @@ const initialState = {
     registrationError: false,
 }
 
-export const registrationReducer = (state = initialState, action: any) => {
+export const registrationReducer = (state = initialState, action: TRegisterAction) => {
     switch (action.type) {
         case SET_REGISTER_FORM_VALUE:
             return {

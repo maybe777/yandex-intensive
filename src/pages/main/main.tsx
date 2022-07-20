@@ -1,5 +1,5 @@
 import React from 'react'
-import {useSelector} from "react-redux";
+import {useSelector} from "../../service/hooks";
 import styles from "./main.module.css";
 import ErrorHandler from "../../components/error/error-handler";
 import {DndProvider} from "react-dnd";
@@ -8,9 +8,9 @@ import BurgerIngredients from "../../components/burger-ingredients/burger-ingred
 import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 
 
-export default function MainPage(){
+export default function MainPage() {
 
-    const dataFailed = useSelector((store: any) => store.ingredients.dataFailed);
+    const dataFailed = useSelector(store => store.ingredients.dataFailed);
 
     if (dataFailed) {
         return (

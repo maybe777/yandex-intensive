@@ -3,7 +3,7 @@ import styles from "./burger-constructor-item.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {removeItem, sortItem} from "../../redux/actions/constructor-actions";
 import {useDrag, useDrop} from "react-dnd";
-import {useDispatch} from "react-redux";
+import {useDispatch} from "../../service/hooks";
 
 
 const BurgerConstructorItem: FC<TConstructorProps> = ({item, index}) => {
@@ -37,12 +37,10 @@ const BurgerConstructorItem: FC<TConstructorProps> = ({item, index}) => {
                 return
             }
 
-            // @ts-ignore
-            const hoverBoundRect = dndRef.current?.getBoundingClientRect()
+            const hoverBoundRect: DOMRect = dndRef.current?.getBoundingClientRect()
             const hoverY = (hoverBoundRect.bottom - hoverBoundRect.top) / 1.2
-            const clientOffset = monitor.getClientOffset()
-            // @ts-ignore
-            const clientY = clientOffset?.y - hoverBoundRect?.top
+            const clientOffset: any = monitor.getClientOffset()
+            const clientY: number = clientOffset?.y - hoverBoundRect?.top
 
             if (dragIndex < index && clientY < hoverY) {
                 return
@@ -52,7 +50,6 @@ const BurgerConstructorItem: FC<TConstructorProps> = ({item, index}) => {
                 return
             }
 
-            //@ts-ignore
             dispatch(sortItem(item.index, index))
 
             item.index = index
@@ -73,7 +70,6 @@ const BurgerConstructorItem: FC<TConstructorProps> = ({item, index}) => {
                 thumbnail={item.image}
                 price={item.price}
                 isLocked={false}
-                //@ts-ignore
                 handleClose={() => dispatch(removeItem(index))}
             />
         </div>

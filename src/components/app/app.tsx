@@ -12,7 +12,7 @@ import styles from "./app.module.css";
 import AppHeader from "../header/app-header";
 import {ProtectedRoute} from "../protected-route/protected-route";
 import Modal from "../modal/modal";
-import {useDispatch} from "react-redux";
+import {useDispatch} from "../../service/hooks";
 import {getUser} from "../../redux/actions/auth-actions";
 import {getData} from "../../redux/actions/ingredients-actions";
 import OrderDetails from "../details-order/order-details";
@@ -28,10 +28,8 @@ const App: FC = () => {
     const loggedIn: boolean = !!getLocalStorageItem('user')
 
     useEffect(() => {
-        // @ts-ignore
         dispatch(getData())
         if (loggedIn) {
-            //@ts-ignore
             dispatch(getUser())
         }
     }, [dispatch])
