@@ -24,7 +24,7 @@ interface IRegisterErrorAction {
 }
 
 
-export type TRegisterAction =
+export type TRegisterActions =
     ISetRegisterFormValue |
     IRegisterRequestAction |
     IRegisterSuccessAction |

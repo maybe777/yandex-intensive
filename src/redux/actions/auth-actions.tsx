@@ -1,7 +1,7 @@
 import React from "react";
 import {fetchUser, login, logout} from "../../api/api";
 import {TAuthActions} from "../types/auth-actions-types";
-import {AppDispatch, AppThunk} from "../types";
+import {TAppDispatch, TAppThunk} from "../types";
 
 
 export const SET_LOGIN_FORM_VALUE = 'SET_LOGIN_FORM_VALUE'
@@ -15,7 +15,7 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const LOGOUT_ERROR = 'LOGIN_ERROR'
 
-export const setLoginFormValue = (field: string, value: string) => (dispatch: AppDispatch) => {
+export const setLoginFormValue = (field: string, value: string) => (dispatch: TAppDispatch) => {
 
     dispatch(setFormValue(field, value))
 
@@ -24,7 +24,7 @@ export const setLoginFormValue = (field: string, value: string) => (dispatch: Ap
     }
 }
 
-export const getUser: AppThunk = () => (dispatch: AppDispatch) => {
+export const getUser: TAppThunk = () => (dispatch: TAppDispatch) => {
 
     dispatch(getUserRequest());
 
@@ -50,7 +50,7 @@ export const getUser: AppThunk = () => (dispatch: AppDispatch) => {
     }
 }
 
-export const userLogin: AppThunk = (email: string, password: string) => (dispatch: AppDispatch) => {
+export const userLogin: TAppThunk = (email: string, password: string) => (dispatch: TAppDispatch) => {
 
     dispatch(loginRequest());
 
@@ -76,7 +76,7 @@ export const userLogin: AppThunk = (email: string, password: string) => (dispatc
     }
 }
 
-export const userLogout: AppThunk = () => (dispatch: AppDispatch) => {
+export const userLogout: TAppThunk = () => (dispatch: TAppDispatch) => {
 
     dispatch(logoutRequest())
 

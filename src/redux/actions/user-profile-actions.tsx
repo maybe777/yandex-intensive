@@ -1,7 +1,7 @@
 import React from "react"
 import {fetchUser, saveUser} from "../../api/api";
-import {TPersonalSpaceAction} from "../types/user-profile-action-types";
-import {AppDispatch} from "../types";
+import {TPersonalSpaceActions} from "../types/user-profile-action-types";
+import {TAppDispatch} from "../types";
 
 
 export const SET_USER_PROFILE_VALUE: 'SET_USER_PROFILE_VALUE' = 'SET_USER_PROFILE_VALUE'
@@ -12,16 +12,16 @@ export const USER_PROFILE_EDIT_REQUEST: 'USER_PROFILE_EDIT_REQUEST' = 'USER_PROF
 export const USER_PROFILE_EDIT_SUCCESS: 'USER_PROFILE_EDIT_SUCCESS' = 'USER_PROFILE_EDIT_SUCCESS'
 export const USER_PROFILE_EDIT_ERROR: 'USER_PROFILE_EDIT_ERROR' = 'USER_PROFILE_EDIT_ERROR'
 
-export const setUserProfileFormValue = (field: string, value: string) => (dispatch: AppDispatch) => {
+export const setUserProfileFormValue = (field: string, value: string) => (dispatch: TAppDispatch) => {
 
     dispatch(setFormValue(field, value))
 
-    function setFormValue(field: string, value: string): TPersonalSpaceAction {
+    function setFormValue(field: string, value: string): TPersonalSpaceActions {
         return {type: SET_USER_PROFILE_VALUE, field, value}
     }
 }
 
-export const fetchProfile = () => (dispatch: AppDispatch) => {
+export const fetchProfile = () => (dispatch: TAppDispatch) => {
 
     dispatch(fetchProfileRequest())
     fetchUser().then(data => {
@@ -31,21 +31,21 @@ export const fetchProfile = () => (dispatch: AppDispatch) => {
             dispatch(fetchProfileError(err))
         })
 
-    function fetchProfileRequest(): TPersonalSpaceAction {
+    function fetchProfileRequest(): TPersonalSpaceActions {
         return {type: USER_PROFILE_REQUEST}
     }
 
-    function fetchProfileSuccess(user: TUser): TPersonalSpaceAction {
+    function fetchProfileSuccess(user: TUser): TPersonalSpaceActions {
         return {type: USER_PROFILE_SUCCESS, user}
     }
 
-    function fetchProfileError(error: string): TPersonalSpaceAction {
+    function fetchProfileError(error: string): TPersonalSpaceActions {
         return {type: USER_PROFILE_ERROR, error}
     }
 }
 
 
-export const editProfile = (name: string, email: string) => (dispatch: AppDispatch) => {
+export const editProfile = (name: string, email: string) => (dispatch: TAppDispatch) => {
 
     let form: TUser = {
         name: name, email: email
@@ -60,15 +60,15 @@ export const editProfile = (name: string, email: string) => (dispatch: AppDispat
             dispatch(editProfileError(err))
         })
 
-    function editProfileRequest(form: TUser): TPersonalSpaceAction {
+    function editProfileRequest(form: TUser): TPersonalSpaceActions {
         return {type: USER_PROFILE_EDIT_REQUEST, form}
     }
 
-    function editProfileSuccess(user: TUser): TPersonalSpaceAction {
+    function editProfileSuccess(user: TUser): TPersonalSpaceActions {
         return {type: USER_PROFILE_EDIT_SUCCESS, user}
     }
 
-    function editProfileError(error: string): TPersonalSpaceAction {
+    function editProfileError(error: string): TPersonalSpaceActions {
         return {type: USER_PROFILE_EDIT_ERROR, error}
     }
 }

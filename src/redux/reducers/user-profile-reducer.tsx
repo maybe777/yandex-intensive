@@ -5,7 +5,7 @@ import {
     USER_PROFILE_REQUEST,
     USER_PROFILE_SUCCESS
 } from "../actions/user-profile-actions";
-import {TPersonalSpaceAction} from "../types/user-profile-action-types";
+import {TPersonalSpaceActions} from "../types/user-profile-action-types";
 
 
 const initialState: IUserProfileInitialState = {
@@ -20,7 +20,7 @@ const initialState: IUserProfileInitialState = {
     error: ""
 }
 
-export function userProfileReducer(state = initialState, action: TPersonalSpaceAction) {
+export function userProfileReducer(state = initialState, action: TPersonalSpaceActions) {
     switch (action.type) {
         case SET_USER_PROFILE_VALUE:
             return {

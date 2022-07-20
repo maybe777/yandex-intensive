@@ -41,7 +41,7 @@ interface IUserProfileEditError {
 }
 
 
-export type TPersonalSpaceAction =
+export type TPersonalSpaceActions =
     ISetUserProfileFormValue |
     IUserProfileRequest |
     IUserProfileSuccess |

@@ -1,6 +1,6 @@
 import React from "react";
 import {dataRequest} from "../../api/api";
-import {AppDispatch, AppThunk} from "../types";
+import {TAppDispatch, TAppThunk} from "../types";
 import {TIngredientsActions} from "../types/ingredients-actions-types";
 
 
@@ -8,7 +8,7 @@ export const GET_DATA_REQUEST: 'GET_DATA_REQUEST' = "GET_DATA_REQUEST"
 export const GET_DATA_SUCCESS: 'GET_DATA_SUCCESS' = "GET_DATA_SUCCESS"
 export const GET_DATA_ERROR: 'GET_DATA_ERROR' = "GET_DATA_ERROR"
 
-export const getData:AppThunk = () => (dispatch: AppDispatch) => {
+export const getData:TAppThunk = () => (dispatch: TAppDispatch) => {
 
     dispatch(getDataRequest());
     dataRequest()

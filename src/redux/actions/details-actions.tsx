@@ -1,11 +1,11 @@
 import React from 'react';
-import {AppDispatch} from "../types";
+import {TAppDispatch} from "../types";
 import {TDetailsAction} from "../types/details-actions-types";
 
 
 export const SHOW_DETAILS: 'SHOW_DETAILS' = "SHOW_DETAILS"
 
-export const showDetails = (item: IBurgerItem) => (dispatch: AppDispatch) => {
+export const showDetails = (item: IBurgerItem) => (dispatch: TAppDispatch) => {
 
     dispatch(showDetails());
 

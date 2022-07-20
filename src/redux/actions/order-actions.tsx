@@ -1,6 +1,6 @@
 import React from "react";
 import {fetchOrder} from "../../api/api";
-import {AppDispatch, AppThunk} from "../types";
+import {TAppDispatch, TAppThunk} from "../types";
 import {TOrderActions} from "../types/order-actions-types";
 
 
@@ -8,7 +8,7 @@ export const GET_ORDER_REQUEST: 'GET_ORDER_REQUEST' = "GET_ORDER_REQUEST"
 export const GET_ORDER_SUCCESS: 'GET_ORDER_SUCCESS' = "GET_ORDER_SUCCESS"
 export const GET_ORDER_ERROR: 'GET_ORDER_ERROR' = "GET_ORDER_ERROR"
 
-export const getOrder: AppThunk = () => (dispatch: AppDispatch) => {
+export const getOrder: TAppThunk = () => (dispatch: TAppDispatch) => {
 
     dispatch(orderRequest());
     fetchOrder()
