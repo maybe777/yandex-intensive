@@ -25,7 +25,6 @@ interface IGetUserSuccessAction {
 
 interface IGetUserErrorAction {
     readonly type: typeof GET_USER_ERROR
-    readonly error: string
 }
 
 interface ILoginRequestAction {
@@ -39,7 +38,6 @@ interface ILoginSuccessAction {
 
 interface ILoginErrorAction {
     readonly type: typeof LOGIN_ERROR
-    readonly error: string
 }
 
 interface ILogoutRequestAction {
@@ -52,7 +50,6 @@ interface ILogoutSuccessAction {
 
 interface ILogoutErrorAction {
     readonly type: typeof LOGOUT_ERROR
-    readonly error: string
 }
 
 export type TAuthActions =

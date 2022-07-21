@@ -8,6 +8,7 @@ import {
     LOGOUT_SUCCESS,
     SET_LOGIN_FORM_VALUE
 } from "../actions/auth-actions";
+import {TAuthActions} from "../types/auth-actions-types";
 
 
 const initialState: IAuthInitialState = {
@@ -27,7 +28,7 @@ const initialState: IAuthInitialState = {
     user: null
 }
 
-export function authReducer(state = initialState, action: any) {
+export function authReducer(state = initialState, action: TAuthActions) {
     switch (action.type) {
         case SET_LOGIN_FORM_VALUE:
             return {

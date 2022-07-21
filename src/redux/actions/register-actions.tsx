@@ -18,7 +18,7 @@ export const setRegisterFormValue = (field: string, value: string) => (dispatch:
     }
 }
 
-export const userRegister: TAppThunk = (name: string, email: string, password: string) => (dispatch: TAppDispatch) => {
+export const userRegister = (name: string, email: string, password: string): TAppThunk => (dispatch: TAppDispatch) => {
 
     let form: TRegisterForm = {
         name: name, email: email, password: password

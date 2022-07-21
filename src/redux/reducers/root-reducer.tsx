@@ -7,6 +7,7 @@ import constructorReducer from "./constructor-reducer";
 import {authReducer} from "./auth-reducer";
 import {registrationReducer} from "./register-reducer";
 import {userProfileReducer} from "./user-profile-reducer";
+import {wsReducer} from "./websocket-reducer";
 
 
 const rootReducer = combineReducers({
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     burger: constructorReducer,
     auth: authReducer,
     register: registrationReducer,
-    profile: userProfileReducer
+    profile: userProfileReducer,
+    ws: wsReducer
 });
 
 export default rootReducer;

@@ -1,7 +1,7 @@
 import React from "react"
 import {fetchUser, saveUser} from "../../api/api";
 import {TPersonalSpaceActions} from "../types/user-profile-action-types";
-import {TAppDispatch} from "../types";
+import {TAppDispatch, TAppThunk} from "../types";
 
 
 export const SET_USER_PROFILE_VALUE: 'SET_USER_PROFILE_VALUE' = 'SET_USER_PROFILE_VALUE'
@@ -21,7 +21,7 @@ export const setUserProfileFormValue = (field: string, value: string) => (dispat
     }
 }
 
-export const fetchProfile = () => (dispatch: TAppDispatch) => {
+export const fetchProfile = (): TAppThunk => (dispatch: TAppDispatch) => {
 
     dispatch(fetchProfileRequest())
     fetchUser().then(data => {
@@ -45,7 +45,7 @@ export const fetchProfile = () => (dispatch: TAppDispatch) => {
 }
 
 
-export const editProfile = (name: string, email: string) => (dispatch: TAppDispatch) => {
+export const editProfile = (name: string, email: string): TAppThunk => (dispatch: TAppDispatch) => {
 
     let form: TUser = {
         name: name, email: email

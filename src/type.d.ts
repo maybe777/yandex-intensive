@@ -86,13 +86,6 @@ type TProtectedRoute = {
     exact: boolean
 }
 
-interface IElementCalc {
-    currentPosition: number,
-    sectionPositionArray: IHeaderData[],
-    startIndex: number,
-    endIndex: number
-}
-
 interface IAuthInitialState {
     form: {
         login: string,
@@ -120,7 +113,7 @@ interface IRegisterInitialState {
     registrationError: boolean,
 }
 
-interface IUserProfileInitialState{
+interface IUserProfileInitialState {
     form?: {
         name: string,
         email: string
@@ -130,4 +123,21 @@ interface IUserProfileInitialState{
     profileRequest: boolean,
     profileError: boolean,
     error: string
+}
+
+type WSOrder = {
+    _id: string,
+    ingredients: Array<string>,
+    status: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+    number: number
+}
+
+interface TWSInitState {
+    wsConnect: false,
+    messages: Array<WSOrder>,
+
+    error?: Event
 }

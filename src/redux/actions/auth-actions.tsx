@@ -24,7 +24,7 @@ export const setLoginFormValue = (field: string, value: string) => (dispatch: TA
     }
 }
 
-export const getUser: TAppThunk = () => (dispatch: TAppDispatch) => {
+export const getUser = (): TAppThunk => (dispatch: TAppDispatch) => {
 
     dispatch(getUserRequest());
 
@@ -32,8 +32,8 @@ export const getUser: TAppThunk = () => (dispatch: TAppDispatch) => {
         .then(user => {
             dispatch(getUserSuccess(user))
         }).catch(
-        err => {
-            dispatch(getUserError(err))
+        () => {
+            dispatch(getUserError())
         });
 
 
@@ -45,12 +45,12 @@ export const getUser: TAppThunk = () => (dispatch: TAppDispatch) => {
         return {type: GET_USER_SUCCESS, user}
     }
 
-    function getUserError(error: string): TAuthActions {
-        return {type: LOGIN_ERROR, error}
+    function getUserError(): TAuthActions {
+        return {type: LOGIN_ERROR}
     }
 }
 
-export const userLogin: TAppThunk = (email: string, password: string) => (dispatch: TAppDispatch) => {
+export const userLogin = (email: string, password: string): TAppThunk => (dispatch: TAppDispatch) => {
 
     dispatch(loginRequest());
 
@@ -58,8 +58,8 @@ export const userLogin: TAppThunk = (email: string, password: string) => (dispat
         .then(data => {
             dispatch(loginSuccess(data.user));
         }).catch(
-        err => {
-            dispatch(loginError(err))
+        () => {
+            dispatch(loginError())
         });
 
 
@@ -71,12 +71,12 @@ export const userLogin: TAppThunk = (email: string, password: string) => (dispat
         return {type: LOGIN_SUCCESS, user}
     }
 
-    function loginError(error: string): TAuthActions {
-        return {type: LOGIN_ERROR, error}
+    function loginError(): TAuthActions {
+        return {type: LOGIN_ERROR}
     }
 }
 
-export const userLogout: TAppThunk = () => (dispatch: TAppDispatch) => {
+export const userLogout = () => (dispatch: TAppDispatch) => {
 
     dispatch(logoutRequest())
 
@@ -84,8 +84,8 @@ export const userLogout: TAppThunk = () => (dispatch: TAppDispatch) => {
         .then(() => {
             dispatch(logoutSuccess())
         })
-        .catch(err => {
-            dispatch(logoutError(err))
+        .catch(() => {
+            dispatch(logoutError())
         })
 
     function logoutRequest(): TAuthActions {
@@ -96,8 +96,8 @@ export const userLogout: TAppThunk = () => (dispatch: TAppDispatch) => {
         return {type: LOGOUT_SUCCESS}
     }
 
-    function logoutError(error: string): TAuthActions {
-        return {type: LOGOUT_ERROR, error}
+    function logoutError(): TAuthActions {
+        return {type: LOGOUT_ERROR}
     }
 }
 

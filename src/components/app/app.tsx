@@ -17,6 +17,7 @@ import {getUser} from "../../redux/actions/auth-actions";
 import {getData} from "../../redux/actions/ingredients-actions";
 import OrderDetails from "../details-order/order-details";
 import {getLocalStorageItem} from "../../service/token-service";
+import {Feed} from "../../pages/feed/feed";
 
 
 const App: FC = () => {
@@ -60,6 +61,9 @@ const App: FC = () => {
                     <ProtectedRoute path={"/login"} exact={true}>
                         <LoginPage/>
                     </ProtectedRoute>
+                    <Route path={"/feed"} exact={true}>
+                        <Feed />
+                    </Route>
                     <Route path={"/"} exact={true}>
                         <MainPage/>
                     </Route>
