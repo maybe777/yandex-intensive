@@ -7,7 +7,7 @@ import constructorReducer from "./constructor-reducer";
 import {authReducer} from "./auth-reducer";
 import {registrationReducer} from "./register-reducer";
 import {userProfileReducer} from "./user-profile-reducer";
-import {wsReducer} from "./websocket-reducer";
+import {wsReducer} from "./ws-feed-reducer";
 
 
 const rootReducer = combineReducers({

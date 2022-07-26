@@ -137,7 +137,13 @@ type WSOrder = {
 
 interface TWSInitState {
     wsConnect: false,
+    wsRequest: false,
     messages: Array<WSOrder>,
 
-    error?: Event
+    error?: string
+}
+
+type WSAction = {
+    type: string,
+    payload: string
 }
