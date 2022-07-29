@@ -10,7 +10,7 @@ export const socketMiddleware = (wsActions: any): Middleware => {
         let reconnectionTimer: number = 0;
         let url: string = '';
 
-        return (next) => (action: WSAction) => {
+        return (next) => (action: TWSAction) => {
             const {dispatch} = store;
             const {type, payload} = action;
 
@@ -31,7 +31,7 @@ export const socketMiddleware = (wsActions: any): Middleware => {
                 };
                 socket.onmessage = event => {
                     const {data} = event;
-                    dispatch({type: onMessage, payload: data})
+                    dispatch({type: onMessage, payload: JSON.parse(data)})
                 };
                 socket.onclose = (event) => {
                     if (event.code !== 1000) {
@@ -55,7 +55,6 @@ export const socketMiddleware = (wsActions: any): Middleware => {
                     reconnectionTimer = 0
                     console.log('WS Connection closed from middleware.')
                 }
-
             }
             next(action)
         };

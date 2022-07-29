@@ -4,7 +4,12 @@ import {TWSActions} from "../types/ws-action-types";
 const WSInitialState: TWSInitState = {
     wsConnect: false,
     wsRequest: false,
-    messages: [],
+    data: {
+        success: false,
+        orders: [],
+        total: 0,
+        totalToday: 0
+    },
     error: undefined
 }
 
@@ -38,7 +43,7 @@ export const wsReducer = (state = WSInitialState, action: TWSActions) => {
         case "WS_GET_MESSAGE":
             return {
                 ...state,
-                messages: [...state.messages, action.payload]
+                data: action.payload
             }
         default:
             return state

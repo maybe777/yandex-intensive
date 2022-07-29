@@ -62,7 +62,7 @@ const App: FC = () => {
                         <LoginPage/>
                     </ProtectedRoute>
                     <Route path={"/feed"} exact={true}>
-                        <Feed />
+                        <Feed/>
                     </Route>
                     <Route path={"/"} exact={true}>
                         <MainPage/>

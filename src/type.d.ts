@@ -125,7 +125,14 @@ interface IUserProfileInitialState {
     error: string
 }
 
-type WSOrder = {
+type TFeedData = {
+    success: boolean,
+    orders: ReadonlyArray<TWSOrder>,
+    total: number,
+    totalToday: number
+}
+
+type TWSOrder = {
     _id: string,
     ingredients: Array<string>,
     status: string,
@@ -136,14 +143,14 @@ type WSOrder = {
 }
 
 interface TWSInitState {
-    wsConnect: false,
-    wsRequest: false,
-    messages: Array<WSOrder>,
+    wsConnect?: false,
+    wsRequest?: false,
+    data: TFeedData,
 
     error?: string
 }
 
-type WSAction = {
+type TWSAction = {
     type: string,
     payload: string
 }

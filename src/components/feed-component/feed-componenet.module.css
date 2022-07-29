@@ -1,0 +1,52 @@
+.feedComponent {
+    padding: 17px;
+    display: flex;
+    flex-direction: column;
+    width: 520px;
+    background: #2F2F37;
+    border-radius: 20px;
+}
+
+.feedComponentHeader {
+    margin: 7px 15px;
+}
+
+.feedComponentDetails {
+    align-content: center;
+}
+
+.feedName {
+    margin-left: 15px;
+}
+
+.feedDetails {
+    margin-left: 19px;
+    margin-top: 9px;
+}
+
+.feedImagesBlock {
+    float: left;
+    display: flex;
+    flex-direction: row;
+    margin-left: 15px;
+}
+
+.remains {
+    margin-top: 15px;
+    margin-left: -15px;
+}
+
+.ingredientImg {
+    width: 50px;
+    height: 50px;
+    border-radius: 27px;
+    border: 2px solid #6a37ac;
+    background: #000;
+}
+
+.price {
+    display: flex;
+    justify-items: center;
+}
+
+
