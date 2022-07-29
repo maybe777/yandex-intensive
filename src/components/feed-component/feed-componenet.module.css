@@ -8,7 +8,7 @@
 }
 
 .feedComponentHeader {
-    margin: 7px 15px;
+    margin: 7px 5px;
 }
 
 .feedComponentDetails {
@@ -16,11 +16,11 @@
 }
 
 .feedName {
-    margin-left: 15px;
+    margin-left: 5px;
 }
 
 .feedDetails {
-    margin-left: 19px;
+    margin-left: 17px;
     margin-top: 9px;
 }
 
@@ -33,7 +33,7 @@
 
 .remains {
     margin-top: 15px;
-    margin-left: -15px;
+    margin-left: -17px;
 }
 
 .ingredientImg {

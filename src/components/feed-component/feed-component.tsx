@@ -95,7 +95,7 @@ export const FeedComponent = (order: TWSOrder) => {
                         )}
                     </ul>
                 </div>
-                <div className='text_type_digits-default' style={{float: "right", margin: "15px"}}>
+                <div className='text_type_digits-default' style={{float: "right", marginLeft: "10px", marginTop: "15px"}}>
                     <div className={styles.price}>
                         <span style={{marginRight: "10px"}}>{orderInfo?.totalPrice}</span>
                         <CurrencyIcon type={"primary"}/>

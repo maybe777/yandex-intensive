@@ -44,7 +44,7 @@ export const Feed: FC = () => {
                 <div className={styles.feedList}>
                     <ul className={styles.feedListUl}>
                         {
-                            orderList.splice(0, 10).map((item: TWSOrder) => (
+                            orderList.splice(0, 20).map((item: TWSOrder) => (
                                 <li className={styles.feedListItem} key={item._id}>
                                     <FeedComponent
                                         _id={item._id}
