@@ -1,13 +1,14 @@
-import React, {FC, useEffect} from "react";
-import {useDispatch, useSelector} from "../../service/hooks";
-import {wsConnectionClosed, wsConnection} from "../../redux/actions/ws-feed-actions";
+import React, {FC} from "react";
+import {useSelector} from "../../service/hooks";
 import styles from './feed.module.css'
 import {FeedComponent} from "../../components/feed-component/feed-component";
+import {Link, useLocation} from "react-router-dom";
 
 
 export const Feed: FC = () => {
 
-    const WS_FEED_URL = 'wss://norma.nomoreparties.space/orders/all'
+    const location = useLocation()
+
 
     const {
         data: {
@@ -16,16 +17,14 @@ export const Feed: FC = () => {
             totalToday
         }
     } = useSelector(store => store.ws)
-    const dispatch = useDispatch()
 
     const orderList: Array<TWSOrder> = orders
 
-    useEffect(() => {
-        dispatch(wsConnection(WS_FEED_URL))
-        return () => {
-            dispatch(wsConnectionClosed())
-        }
-    }, [dispatch])
+    orderList.map(order => {
+        console.log("Order from parent: " + order._id)
+    })
+
+
 
     const ready = orderList.filter((order: TWSOrder) => {
         return order.status === 'done'
@@ -44,19 +43,25 @@ export const Feed: FC = () => {
                 <div className={styles.feedList}>
                     <ul className={styles.feedListUl}>
                         {
-                            orderList.splice(0, 20).map((item: TWSOrder) => (
-                                <li className={styles.feedListItem} key={item._id}>
-                                    <FeedComponent
-                                        _id={item._id}
-                                        createdAt={item.createdAt}
-                                        ingredients={item.ingredients}
-                                        number={item.number}
-                                        name={item.name}
-                                        status={item.status}
-                                        updatedAt={item.updatedAt}
-                                    />
-                                </li>))
-                        }
+                            orderList.map((item: TWSOrder) => (
+                                <Link
+                                    to={{
+                                        pathname: '/feed/' + item._id,
+                                        state: {background: location}
+                                    }}>
+                                    <li key={item._id} className={styles.feedListItem}>
+                                        <FeedComponent
+                                            _id={item._id}
+                                            createdAt={item.createdAt}
+                                            ingredients={item.ingredients}
+                                            number={item.number}
+                                            name={item.name}
+                                            status={item.status}
+                                            updatedAt={item.updatedAt}
+                                        />
+
+                                    </li>
+                                </Link>))}
                     </ul>
                 </div>
                 <div className={styles.orderStat}>

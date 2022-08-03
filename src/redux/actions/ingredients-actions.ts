@@ -1,4 +1,3 @@
-import React from "react";
 import {dataRequest} from "../../api/api";
 import {TAppDispatch, TAppThunk} from "../types";
 import {TIngredientsActions} from "../types/ingredients-actions-types";

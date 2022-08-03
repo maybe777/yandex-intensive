@@ -1,4 +1,3 @@
-import React from 'react'
 import {register} from "../../api/api";
 import {TRegisterActions} from "../types/register-actions-types";
 import {TAppDispatch, TAppThunk} from "../types";

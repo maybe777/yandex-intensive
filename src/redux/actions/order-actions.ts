@@ -1,4 +1,3 @@
-import React from "react";
 import {fetchOrder} from "../../api/api";
 import {TAppDispatch, TAppThunk} from "../types";
 import {TOrderActions} from "../types/order-actions-types";

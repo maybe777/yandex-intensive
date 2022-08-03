@@ -1,4 +1,3 @@
-import React from "react";
 import {GET_ORDER_ERROR, GET_ORDER_REQUEST, GET_ORDER_SUCCESS} from "../actions/order-actions";
 import {TOrderActions} from "../types/order-actions-types";
 

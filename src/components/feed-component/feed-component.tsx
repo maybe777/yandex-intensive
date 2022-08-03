@@ -2,6 +2,7 @@ import React, {useMemo} from 'react';
 import styles from './feed-componenet.module.css'
 import {useSelector} from '../../service/hooks';
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {dateFormatter} from "../../service/feed-details.service";
 
 
 export const FeedComponent = (order: TWSOrder) => {
@@ -13,20 +14,7 @@ export const FeedComponent = (order: TWSOrder) => {
 
         if (!ingredientsData.length) return null
 
-        const today = () => {
-            let today = new Date();
-            let date = new Date(order.createdAt)
-            const one_day = 1000 * 60 * 60 * 24;
-            let result = Math.ceil((date.getTime() - today.getTime()) / (one_day))
-            switch (result) {
-                case 0 :
-                    return "Сегодня, " + date.toString().slice(15, 33)
-                case 2 :
-                    return "Вчера, " + date.toString().slice(15, 33)
-                default :
-                    return result + " дня назад, " + date.toString().slice(15, 33)
-            }
-        }
+        const today = dateFormatter(order.createdAt)
 
         const ingredients = order.ingredients.reduce((total: Array<IBurgerItem>, item) => {
             const ingredient = ingredientsData.find((burgerItem) => burgerItem._id === item)
@@ -52,7 +40,6 @@ export const FeedComponent = (order: TWSOrder) => {
         }
     }, [order, ingredientsData])
 
-
     return (
         <div className={styles.feedComponent}>
             <div className={styles.feedComponentHeader}>
@@ -61,7 +48,7 @@ export const FeedComponent = (order: TWSOrder) => {
                 </div>
                 <div className='text text_type_main-small text_color_inactive'
                      style={{float: 'right', marginTop: '4px'}}>
-                    {orderInfo?.today()}
+                    {orderInfo?.today}
                 </div>
             </div>
             <div className={'text_type_main-default ' + styles.feedName}>
@@ -95,7 +82,8 @@ export const FeedComponent = (order: TWSOrder) => {
                         )}
                     </ul>
                 </div>
-                <div className='text_type_digits-default' style={{float: "right", marginLeft: "10px", marginTop: "15px"}}>
+                <div className='text_type_digits-default'
+                     style={{float: "right", marginLeft: "10px", marginTop: "15px"}}>
                     <div className={styles.price}>
                         <span style={{marginRight: "10px"}}>{orderInfo?.totalPrice}</span>
                         <CurrencyIcon type={"primary"}/>

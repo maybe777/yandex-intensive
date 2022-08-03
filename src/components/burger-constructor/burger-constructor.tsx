@@ -1,13 +1,11 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import styles from './burger-constructor.module.css'
 import {Button, ConstructorElement, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import OrderDetails from "../details-order/order-details";
 import {useDispatch, useSelector} from "../../service/hooks";
 import {useDrop} from "react-dnd";
 import {addItem} from "../../redux/actions/constructor-actions";
 import BurgerConstructorItem from "../burger-constructor-item/burger-constructor-item";
 import ChiefCook from "../chief-cook/chief-cook";
-import Modal from "../modal/modal";
 import {Link, useLocation} from 'react-router-dom';
 
 
@@ -18,8 +16,6 @@ const BurgerConstructor: FC = () => {
     const dispatch = useDispatch();
 
     const location = useLocation()
-
-    const [isVisible, setIsVisible] = useState<boolean>(false)
 
     const [{isHover}, dropTarget] = useDrop(() => ({
         accept: "burgerItem",
@@ -72,14 +68,6 @@ const BurgerConstructor: FC = () => {
         }, 0)
     }
 
-    function openModal() {
-        setIsVisible(true)
-    }
-
-    function closeModal() {
-        setIsVisible(false)
-    }
-
     const mainStyle: string = isHover ? styles.main + " " + styles.onHoverMain : styles.main
 
     return (
@@ -114,13 +102,8 @@ const BurgerConstructor: FC = () => {
                         pathname: '/order',
                         state: {background: location}
                     }}>
-                    <Button type={"primary"} size={"large"} onClick={openModal}>Оформить заказ</Button>
+                    <Button type={"primary"} size={"large"}>Оформить заказ</Button>
                 </Link>
-                {isVisible && (
-                    <Modal onClose={closeModal} title="">
-                        <OrderDetails/>
-                    </Modal>
-                )}
             </div>
         </div>
     );

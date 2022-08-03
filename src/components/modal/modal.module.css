@@ -8,11 +8,10 @@
     overflow: hidden;
     z-index: 1000;
     border-radius: 30px;
-    padding-bottom: 40px;
 }
 
 .modalContainer {
-    padding: 40px;
+    padding: 25px;
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-areas: 'head close'
@@ -28,7 +27,6 @@
 }
 
 .close {
-    padding-top: 20px;
     display: flex;
     justify-content: flex-end;
     grid-area: close;

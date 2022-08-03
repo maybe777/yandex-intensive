@@ -1,4 +1,3 @@
-import React from "react"
 import {fetchUser, saveUser} from "../../api/api";
 import {TPersonalSpaceActions} from "../types/user-profile-action-types";
 import {TAppDispatch, TAppThunk} from "../types";

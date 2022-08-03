@@ -1,4 +1,3 @@
-import React from "react";
 import {ADD_ITEM, REMOVE_ITEM, SORT_ITEM} from "../actions/constructor-actions";
 import {TConstructorActions} from "../types/constructor-actions-types";
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import {
     REGISTER_ERROR,
     REGISTER_REQUEST,

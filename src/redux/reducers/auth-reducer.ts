@@ -1,4 +1,3 @@
-import React from "react";
 import {
     GET_USER_ERROR, GET_USER_REQUEST, GET_USER_SUCCESS,
     LOGIN_ERROR,

@@ -1,8 +1,7 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
 import styles from './burger-ingredients.module.css'
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
-import {useDispatch, useSelector} from "../../service/hooks";
-import {showDetails} from "../../redux/actions/details-actions";
+import {useSelector} from "../../service/hooks";
 import {elementCalculator} from "../../service/scroll-calcuator";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -11,8 +10,6 @@ const BurgerIngredients: FC = () => {
 
     const data = useSelector(store => store.ingredients.data)
     const items: Array<IBurgerItem> = useSelector(store => store.burger.items)
-
-    const dispatch = useDispatch()
 
     const [scrollIndex, setScrollIndex] = useState<number>(0)
 
@@ -37,10 +34,6 @@ const BurgerIngredients: FC = () => {
     const bunRef = useRef<HTMLElement>(null)
     const sauceRef = useRef<HTMLElement>(null)
     const noviceRef = useRef<HTMLElement>(null)
-
-    function openModal(item: IBurgerItem) {
-        dispatch(showDetails(item))
-    }
 
     const BUNS: Array<IBurgerItem> = data.filter((item: IBurgerItem) => {
         return item.type === "bun";
@@ -71,10 +64,7 @@ const BurgerIngredients: FC = () => {
                 <h2 ref={category.ref}>{category.title}</h2>
             </div>
             {category.data.map((item: IBurgerItem) => (
-                <div key={"item_" + item._id} className={styles.ingredient + " mb-3"}
-                     onClick={() => {
-                         openModal(item)
-                     }}>
+                <div key={"item_" + item._id} className={styles.ingredient + " mb-3"}>
                     <BurgerIngredient item={item} count={itemsCount(items, item)}/>
                 </div>
             ))}

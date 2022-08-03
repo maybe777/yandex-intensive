@@ -1,7 +1,6 @@
 import {TAuthActions} from "./auth-actions-types";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {TConstructorActions} from "./constructor-actions-types";
-import {TDetailsAction} from "./details-actions-types";
 import {TIngredientsActions} from "./ingredients-actions-types";
 import {TOrderActions} from "./order-actions-types";
 import {TRegisterActions} from "./register-actions-types";
@@ -12,7 +11,7 @@ import rootReducer from "../reducers/root-reducer";
 export type TRootState = ReturnType<typeof rootReducer>;
 
 // Типизация всех экшенов приложения
-export type TApplicationActions = TAuthActions | TConstructorActions | TDetailsAction |
+export type TApplicationActions = TAuthActions | TConstructorActions |
     TIngredientsActions | TOrderActions | TRegisterActions | TPersonalSpaceActions | TWSActions;
 
 // Типизация thunk приложения

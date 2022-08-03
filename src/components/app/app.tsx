@@ -18,9 +18,13 @@ import {getData} from "../../redux/actions/ingredients-actions";
 import OrderDetails from "../details-order/order-details";
 import {getLocalStorageItem} from "../../service/token-service";
 import {Feed} from "../../pages/feed/feed";
+import {FeedDetails} from "../feed-details/feed-details";
+import {wsConnection, wsConnectionClosed} from "../../redux/actions/ws-feed-actions";
 
 
 const App: FC = () => {
+
+    const WS_FEED_URL = 'wss://norma.nomoreparties.space/orders/all'
 
     const location = useLocation()
     const history = useHistory()
@@ -30,8 +34,12 @@ const App: FC = () => {
 
     useEffect(() => {
         dispatch(getData())
+        dispatch(wsConnection(WS_FEED_URL))
         if (loggedIn) {
             dispatch(getUser())
+        }
+        return () => {
+            dispatch(wsConnectionClosed())
         }
     }, [dispatch])
 
@@ -45,6 +53,9 @@ const App: FC = () => {
                 <Switch location={background || location}>
                     <Route path={"/ingredients/:id"} exact={true}>
                         <IngredientDetails/>
+                    </Route>
+                    <Route path='/feed/:orderId' exact={true}>
+                        <FeedDetails/>
                     </Route>
                     <ProtectedRoute path={"/forgot-password"} exact={true}>
                         <PasswordForgotPage/>
@@ -80,6 +91,15 @@ const App: FC = () => {
                                         history.goBack()
                                     }} title={"Детали ингредиента"}>
                                     <IngredientDetails/>
+                                </Modal>
+                            </Route>
+                            <Route path='/feed/:orderId' exact={true}>
+                                <Modal
+                                    onClose={() => {
+                                        history.goBack()
+                                        console.log("Onclose pressed!")
+                                    }} title={""}>
+                                    <FeedDetails/>
                                 </Modal>
                             </Route>
                             <ProtectedRoute isAuthOnly={true} path='/order' exact={true}>

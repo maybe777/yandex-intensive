@@ -1,4 +1,3 @@
-import React from "react";
 import {fetchUser, login, logout} from "../../api/api";
 import {TAuthActions} from "../types/auth-actions-types";
 import {TAppDispatch, TAppThunk} from "../types";

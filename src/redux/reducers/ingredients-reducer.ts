@@ -1,4 +1,3 @@
-import React from "react";
 import {GET_DATA_ERROR, GET_DATA_REQUEST, GET_DATA_SUCCESS} from "../actions/ingredients-actions";
 import {TIngredientsActions} from "../types/ingredients-actions-types";
 

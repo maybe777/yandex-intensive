@@ -1,6 +1,3 @@
-import React from 'react';
-
-
 export function elementCalculator(
     currentPosition: number,
     sectionPositionArray: IHeaderData[],
