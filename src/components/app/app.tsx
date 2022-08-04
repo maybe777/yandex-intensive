@@ -21,6 +21,7 @@ import {Feed} from "../../pages/feed/feed";
 import {FeedDetails} from "../feed-details/feed-details";
 import {wsConnection, wsConnectionClosed} from "../../redux/actions/ws-feed-actions";
 import {wsOrderConnection, wsOrderConnectionClosed} from "../../redux/actions/ws-order-actions";
+import {clearOrderItems} from "../../redux/actions/constructor-actions";
 
 
 const App: FC = () => {
@@ -113,7 +114,6 @@ const App: FC = () => {
                                 <Modal
                                     onClose={() => {
                                         history.goBack()
-                                        console.log("Onclose pressed!")
                                     }} title={""}>
                                     <FeedDetails/>
                                 </Modal>
@@ -121,6 +121,7 @@ const App: FC = () => {
                             <ProtectedRoute isAuthOnly={true} path='/order' exact={true}>
                                 <Modal
                                     onClose={() => {
+                                        dispatch(clearOrderItems())
                                         history.goBack()
                                     }} title={""}>
                                     <OrderDetails/>

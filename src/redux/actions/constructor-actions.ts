@@ -6,6 +6,7 @@ import {TConstructorActions} from "../types/constructor-actions-types";
 export const ADD_ITEM: 'ADD_ITEM' = "ADD_ITEM";
 export const REMOVE_ITEM: 'REMOVE_ITEM' = "REMOVE_ITEM";
 export const SORT_ITEM: 'SORT_ITEM' = "SORT_ITEM";
+export const CLEAR_ITEMS: 'CLEAR_ITEMS' = "CLEAR_ITEMS";
 
 export const addItem = (item: IBurgerItem) => (dispatch: TAppDispatch) => {
 
@@ -42,6 +43,17 @@ export const sortItem = (fromIndex: number, toIndex: number) => (dispatch: TAppD
             type: SORT_ITEM,
             from: from,
             to: to
+        })
+    }
+}
+
+export const clearOrderItems = () => (dispatch: TAppDispatch) => {
+
+    dispatch(clearItems());
+
+    function clearItems(): TConstructorActions {
+        return ({
+            type: CLEAR_ITEMS,
         })
     }
 }

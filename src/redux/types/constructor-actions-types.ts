@@ -1,4 +1,4 @@
-import {ADD_ITEM, REMOVE_ITEM, SORT_ITEM} from "../actions/constructor-actions";
+import {ADD_ITEM, CLEAR_ITEMS, REMOVE_ITEM, SORT_ITEM} from "../actions/constructor-actions";
 
 interface IAddItem {
     readonly type: typeof ADD_ITEM
@@ -16,4 +16,8 @@ interface ISortItem {
     to: number
 }
 
-export type TConstructorActions = IAddItem | IRemoveItem | ISortItem
+interface ICLearItems {
+    readonly type: typeof CLEAR_ITEMS
+}
+
+export type TConstructorActions = IAddItem | IRemoveItem | ISortItem | ICLearItems

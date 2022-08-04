@@ -12,7 +12,11 @@ export const getOrder = (ingredients: Array<string>): TAppThunk => (dispatch: TA
     dispatch(orderRequest());
     fetchOrder(ingredients)
         .then(res => {
-            res ? dispatch(orderSuccess(res)) : dispatch(orderError());
+            if (res) {
+                dispatch(orderSuccess(res))
+            } else {
+                dispatch(orderError())
+            }
         })
         .catch(() => {
             dispatch(orderError());

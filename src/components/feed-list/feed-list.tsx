@@ -13,13 +13,13 @@ export const FeedList = ({items}: IFeedList) => {
         <div className={styles.feedList}>
             <ul className={styles.feedListUl}>
                 {
-                    items.map((item: TWSOrder) => (
+                    items.map((item: TWSOrder, index) => (
                         <Link
                             to={{
                                 pathname: url + '/' + item._id,
                                 state: {background: location}
                             }}>
-                            <li key={item._id} className={styles.feedListItem}>
+                            <li key={item._id + index} className={styles.feedListItem}>
                                 <FeedComponent
                                     _id={item._id}
                                     createdAt={item.createdAt}

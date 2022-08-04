@@ -1,4 +1,4 @@
-import {ADD_ITEM, REMOVE_ITEM, SORT_ITEM} from "../actions/constructor-actions";
+import {ADD_ITEM, CLEAR_ITEMS, REMOVE_ITEM, SORT_ITEM} from "../actions/constructor-actions";
 import {TConstructorActions} from "../types/constructor-actions-types";
 
 
@@ -49,6 +49,12 @@ const constructorReducer = (state = initialState, action: TConstructorActions) =
             return {
                 ...state,
                 items: sortedArray
+            }
+        }
+        case CLEAR_ITEMS: {
+            return {
+                ...state,
+                items: [...initialState.items]
             }
         }
         default:

@@ -2,7 +2,7 @@ import {Middleware, MiddlewareAPI} from "redux";
 import {TAppDispatch, TRootState} from "../types";
 
 
-export const socketMiddleware = (wsActions: any): Middleware => {
+export const socketMiddleware = (wsActions: { [key: string]: any }): Middleware => {
     return ((store: MiddlewareAPI<TAppDispatch, TRootState>) => {
 
         let socket: WebSocket | null = null;
