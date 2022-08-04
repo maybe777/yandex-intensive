@@ -5,14 +5,16 @@ import {TIngredientsActions} from "./ingredients-actions-types";
 import {TOrderActions} from "./order-actions-types";
 import {TRegisterActions} from "./register-actions-types";
 import {TPersonalSpaceActions} from "./user-profile-action-types";
-import {TWSActions} from "./ws-action-types";
+import {TWSActions} from "./ws-feed-action-types";
 import rootReducer from "../reducers/root-reducer";
+import {TWSOrderActions} from "./ws-order-action-types";
 
 export type TRootState = ReturnType<typeof rootReducer>;
 
 // Типизация всех экшенов приложения
 export type TApplicationActions = TAuthActions | TConstructorActions |
-    TIngredientsActions | TOrderActions | TRegisterActions | TPersonalSpaceActions | TWSActions;
+    TIngredientsActions | TOrderActions | TRegisterActions | TPersonalSpaceActions |
+    TWSActions | TWSOrderActions;
 
 // Типизация thunk приложения
 export type TAppThunk<ReturnType = void> = ThunkAction<ReturnType, TRootState, never, TApplicationActions>;

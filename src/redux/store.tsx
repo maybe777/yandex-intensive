@@ -10,8 +10,23 @@ import {
     WS_FEED_CONNECTION_SUCCESS, WS_FEED_GET_MESSAGE,
     WS_FEED_SEND_MESSAGE
 } from "./actions/ws-feed-actions";
+import {
+    WS_ORDER_CONNECTION_CLOSED,
+    WS_ORDER_CONNECTION_ERROR,
+    WS_ORDER_CONNECTION_START,
+    WS_ORDER_CONNECTION_SUCCESS, WS_ORDER_GET_MESSAGE, WS_ORDER_SEND_MESSAGE
+} from "./actions/ws-order-actions";
 
-const wsActions = {
+const wsOrderActions = {
+    wsInit: WS_ORDER_CONNECTION_START,
+    onOpen: WS_ORDER_CONNECTION_SUCCESS,
+    onError: WS_ORDER_CONNECTION_ERROR,
+    onClose: WS_ORDER_CONNECTION_CLOSED,
+    onMessage: WS_ORDER_GET_MESSAGE,
+    wsSendMessage: WS_ORDER_SEND_MESSAGE
+};
+
+const wsFeedActions = {
     wsInit: WS_FEED_CONNECTION_START,
     onOpen: WS_FEED_CONNECTION_SUCCESS,
     onError: WS_FEED_CONNECTION_ERROR,
@@ -21,6 +36,11 @@ const wsActions = {
 };
 
 const store = createStore(rootReducer,
-    composeWithDevTools(applyMiddleware(socketMiddleware(wsActions), thunk)));
+    composeWithDevTools(
+        applyMiddleware(
+            socketMiddleware(wsFeedActions),
+            socketMiddleware(wsOrderActions),
+            thunk)
+    ));
 
 export default store;

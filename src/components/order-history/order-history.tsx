@@ -10,10 +10,23 @@ export const OrderHistory = () => {
         data: {
             orders
         }
-    } = useSelector(store => store.ws)
+    } = useSelector(store => store.wsOrder)
 
     const orderList: Array<TWSOrder> = orders
 
+    orderList.sort((a: TWSOrder, b: TWSOrder) => {
+        const numA = a.number;
+        const numB = b.number;
+
+        let comparison = 0;
+
+        if (numA > numB) {
+            comparison = 1;
+        } else if (numA < numB) {
+            comparison = -1;
+        }
+        return comparison * -1;
+    });
 
     return (
         <div className={styles.listWrapper}>

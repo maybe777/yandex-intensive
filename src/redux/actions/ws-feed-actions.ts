@@ -1,4 +1,4 @@
-import {TWSActions} from "../types/ws-action-types";
+import {TWSActions} from "../types/ws-feed-action-types";
 
 export const WS_FEED_CONNECTION_START: 'WS_FEED_CONNECTION_START' = 'WS_FEED_CONNECTION_START'
 export const WS_FEED_CONNECTION_SUCCESS: 'WS_FEED_CONNECTION_SUCCESS' = 'WS_FEED_CONNECTION_SUCCESS'

@@ -6,6 +6,7 @@ import {authReducer} from "./auth-reducer";
 import {registrationReducer} from "./register-reducer";
 import {userProfileReducer} from "./user-profile-reducer";
 import {wsReducer} from "./ws-feed-reducer";
+import {wsOrderReducer} from "./ws-order-reducer";
 
 
 const rootReducer = combineReducers({
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
     auth: authReducer,
     register: registrationReducer,
     profile: userProfileReducer,
-    ws: wsReducer
+    ws: wsReducer,
+    wsOrder: wsOrderReducer
 });
 
 export default rootReducer;

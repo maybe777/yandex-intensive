@@ -1,6 +1,6 @@
-import {TWSActions} from "../types/ws-feed-action-types";
+import {TWSOrderActions} from "../types/ws-order-action-types";
 
-const WSInitialState: TWSInitState = {
+const initialState = {
     wsConnect: false,
     wsRequest: false,
     data: {
@@ -9,38 +9,41 @@ const WSInitialState: TWSInitState = {
         total: 0,
         totalToday: 0
     },
-    error: undefined,
-    item: null
+    error: undefined
 }
 
-export const wsReducer = (state = WSInitialState, action: TWSActions) => {
+export const wsOrderReducer = (state = initialState, action: TWSOrderActions) => {
+
     switch (action.type) {
-        case "WS_FEED_CONNECTION_START":
+        case "WS_ORDER_CONNECTION_START": {
             return {
                 ...state,
-                wsRequest: true
+                wsRequest: true,
             }
-        case "WS_FEED_CONNECTION_SUCCESS":
+        }
+        case "WS_ORDER_CONNECTION_SUCCESS": {
             return {
                 ...state,
                 wsRequest: false,
                 wsConnect: true,
                 error: undefined
             }
-        case "WS_FEED_CONNECTION_ERROR":
+        }
+        case "WS_ORDER_CONNECTION_ERROR":
             return {
                 ...state,
                 wsRequest: false,
                 wsConnect: false,
                 error: action.payload
             }
-        case "WS_FEED_CONNECTION_CLOSED":
+        case "WS_ORDER_CONNECTION_CLOSED": {
             return {
                 ...state,
                 wsConnect: false,
                 error: action.payload
             }
-        case "WS_FEED_GET_MESSAGE":
+        }
+        case "WS_ORDER_GET_MESSAGE":
             return {
                 ...state,
                 data: action.payload
@@ -48,4 +51,5 @@ export const wsReducer = (state = WSInitialState, action: TWSActions) => {
         default:
             return state
     }
+
 }

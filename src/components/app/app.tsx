@@ -20,11 +20,13 @@ import {getLocalStorageItem} from "../../service/token-service";
 import {Feed} from "../../pages/feed/feed";
 import {FeedDetails} from "../feed-details/feed-details";
 import {wsConnection, wsConnectionClosed} from "../../redux/actions/ws-feed-actions";
+import {wsOrderConnection, wsOrderConnectionClosed} from "../../redux/actions/ws-order-actions";
 
 
 const App: FC = () => {
 
     const WS_FEED_URL = 'wss://norma.nomoreparties.space/orders/all'
+    const WS_ORDER_URL = 'wss://norma.nomoreparties.space/orders'
 
     const location = useLocation()
     const history = useHistory()
@@ -35,11 +37,13 @@ const App: FC = () => {
     useEffect(() => {
         dispatch(getData())
         dispatch(wsConnection(WS_FEED_URL))
+        dispatch(wsOrderConnection(WS_ORDER_URL))
         if (loggedIn) {
             dispatch(getUser())
         }
         return () => {
             dispatch(wsConnectionClosed())
+            dispatch(wsOrderConnectionClosed())
         }
     }, [dispatch])
 
