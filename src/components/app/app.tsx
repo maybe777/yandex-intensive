@@ -57,13 +57,16 @@ const App: FC = () => {
                     <Route path='/feed/:orderId' exact={true}>
                         <FeedDetails/>
                     </Route>
+                    <ProtectedRoute isAuthOnly={true} path='/profile/orders/:orderId' exact={true}>
+                        <FeedDetails/>
+                    </ProtectedRoute>
                     <ProtectedRoute path={"/forgot-password"} exact={true}>
                         <PasswordForgotPage/>
                     </ProtectedRoute>
                     <ProtectedRoute path={"/reset-password"} exact={true}>
                         <PasswordResetPage/>
                     </ProtectedRoute>
-                    <ProtectedRoute isAuthOnly={true} path={"/profile"} exact={true}>
+                    <ProtectedRoute isAuthOnly={true} path={"/profile"} exact={false}>
                         <ProfilePage/>
                     </ProtectedRoute>
                     <ProtectedRoute path={"/register"} exact={true}>
@@ -102,6 +105,15 @@ const App: FC = () => {
                                     <FeedDetails/>
                                 </Modal>
                             </Route>
+                            <ProtectedRoute isAuthOnly={true} path='/profile/orders/:orderId' exact={true}>
+                                <Modal
+                                    onClose={() => {
+                                        history.goBack()
+                                        console.log("Onclose pressed!")
+                                    }} title={""}>
+                                    <FeedDetails/>
+                                </Modal>
+                            </ProtectedRoute>
                             <ProtectedRoute isAuthOnly={true} path='/order' exact={true}>
                                 <Modal
                                     onClose={() => {

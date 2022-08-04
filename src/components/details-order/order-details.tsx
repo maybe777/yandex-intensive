@@ -13,13 +13,27 @@ const OrderDetails: FC = () => {
         orderFailed: store.order.orderFailed
     }));
 
+    const ingredients: Array<string> = []
+    const burger = useSelector(store => store.burger.items)
+    burger.map(item => {
+        ingredients.push(item._id)
+    })
+
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getOrder())
+        if (ingredients && ingredients.length > 0) {
+            dispatch(getOrder(ingredients))
+        }
     }, [dispatch])
 
-    if (orderFailed) {
+    if (ingredients.length === 1) {
+        return (
+            <div className={styles.container}>
+                <p>Выберите ингредиенты</p>
+            </div>
+        )
+    } else if (orderFailed) {
         return (
             <div className={styles.container}>
                 <ErrorHandler/>

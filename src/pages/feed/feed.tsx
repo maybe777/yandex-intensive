@@ -1,14 +1,10 @@
 import React, {FC} from "react";
 import {useSelector} from "../../service/hooks";
 import styles from './feed.module.css'
-import {FeedComponent} from "../../components/feed-component/feed-component";
-import {Link, useLocation} from "react-router-dom";
+import {FeedList} from "../../components/feed-list/feed-list";
 
 
 export const Feed: FC = () => {
-
-    const location = useLocation()
-
 
     const {
         data: {
@@ -19,12 +15,6 @@ export const Feed: FC = () => {
     } = useSelector(store => store.ws)
 
     const orderList: Array<TWSOrder> = orders
-
-    orderList.map(order => {
-        console.log("Order from parent: " + order._id)
-    })
-
-
 
     const ready = orderList.filter((order: TWSOrder) => {
         return order.status === 'done'
@@ -37,33 +27,13 @@ export const Feed: FC = () => {
     return (
         <div className={styles.feed}>
             <div className={styles.feedGrid}>
+
                 <div className={styles.feedHead}>
                     <h1>Лента заказов</h1>
                 </div>
-                <div className={styles.feedList}>
-                    <ul className={styles.feedListUl}>
-                        {
-                            orderList.map((item: TWSOrder) => (
-                                <Link
-                                    to={{
-                                        pathname: '/feed/' + item._id,
-                                        state: {background: location}
-                                    }}>
-                                    <li key={item._id} className={styles.feedListItem}>
-                                        <FeedComponent
-                                            _id={item._id}
-                                            createdAt={item.createdAt}
-                                            ingredients={item.ingredients}
-                                            number={item.number}
-                                            name={item.name}
-                                            status={item.status}
-                                            updatedAt={item.updatedAt}
-                                        />
 
-                                    </li>
-                                </Link>))}
-                    </ul>
-                </div>
+                <FeedList items={orderList}/>
+
                 <div className={styles.orderStat}>
                     <div className={styles.ready}>
                         <h4>Готовы:</h4>

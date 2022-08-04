@@ -14,7 +14,6 @@ const REFRESH_URL: string = BASE_URL + "auth/token"
 const PASSWORD_FORGOT: string = BASE_URL + "password-reset"
 const PASSWORD_RESET: string = BASE_URL + "password-reset/reset"
 const PROFILE: string = BASE_URL + "auth/user"
-const TEMP_ORDER_MOCK_ID: string = "60d3b41abdacab0026a733c6"
 
 export const dataRequest = async () => {
 
@@ -32,17 +31,20 @@ export const dataRequest = async () => {
     return result;
 }
 
-export async function fetchOrder(): Promise<number> {
+export async function fetchOrder(ingredients: Array<string>): Promise<number> {
 
     let result: number = 0;
+
+    let token = getCookieItem('accessToken')
 
     await fetch(ORDER_URL, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
-        body: JSON.stringify({ingredients: TEMP_ORDER_MOCK_ID})
+        body: JSON.stringify({ingredients: ingredients})
     })
         .then(checkResponse)
         .then(data => {

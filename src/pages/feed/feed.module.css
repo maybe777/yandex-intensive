@@ -28,15 +28,6 @@
     grid-area: head;
 }
 
-.feedList {
-    width: 77%;
-    height: 480px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    margin: 0;
-    grid-area: feedList;
-}
-
 .orderStat {
     margin-left: -170px;
     height: 480px;
@@ -85,16 +76,4 @@
 
 .split li {
     margin-top: 5px;
-}
-
-.feedListUl {
-    padding: 0 !important;
-}
-
-.feedListUl a {
-    color: #F2F2F3;
-}
-
-.feedListItem {
-    margin-bottom: 10px;
 }

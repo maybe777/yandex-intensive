@@ -155,3 +155,7 @@ type TWSAction = {
     type: string,
     payload: string
 }
+
+interface IFeedList {
+    items: Array<TWSOrder>
+}
