@@ -1,10 +1,23 @@
-import React, {FC} from "react";
-import {useSelector} from "../../service/hooks";
+import React, {FC, useEffect} from "react";
+import {useDispatch, useSelector} from "../../service/hooks";
 import styles from './feed.module.css'
 import {FeedList} from "../../components/feed-list/feed-list";
+import {getData} from "../../redux/actions/ingredients-actions";
+import {wsConnection, wsConnectionClosed} from "../../redux/actions/ws-feed-actions";
 
 
 export const Feed: FC = () => {
+
+    const WS_FEED_URL = 'wss://norma.nomoreparties.space/orders/all'
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getData())
+        dispatch(wsConnection(WS_FEED_URL))
+        return () => {
+            dispatch(wsConnectionClosed())
+        }
+    }, [dispatch])
 
     const {
         data: {
