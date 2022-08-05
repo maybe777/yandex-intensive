@@ -26,9 +26,6 @@ import {clearOrderItems} from "../../redux/actions/constructor-actions";
 
 const App: FC = () => {
 
-    const WS_FEED_URL = 'wss://norma.nomoreparties.space/orders/all'
-    const WS_ORDER_URL = 'wss://norma.nomoreparties.space/orders'
-
     const location = useLocation()
     const history = useHistory()
     const dispatch = useDispatch();
@@ -37,14 +34,8 @@ const App: FC = () => {
 
     useEffect(() => {
         dispatch(getData())
-        dispatch(wsConnection(WS_FEED_URL))
-        dispatch(wsOrderConnection(WS_ORDER_URL))
         if (loggedIn) {
             dispatch(getUser())
-        }
-        return () => {
-            dispatch(wsConnectionClosed())
-            dispatch(wsOrderConnectionClosed())
         }
     }, [dispatch])
 
