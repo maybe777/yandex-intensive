@@ -159,3 +159,9 @@ type TWSAction = {
 interface IFeedList {
     items: Array<TWSOrder>
 }
+
+interface IOrderDetailsState {
+    orderDetailsRequest: boolean,
+    orderDetailsError: boolean,
+    order: TWSOrder | null
+}

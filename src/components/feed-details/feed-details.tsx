@@ -1,13 +1,24 @@
-import React, {FC, useMemo} from "react";
+import React, {FC, useEffect, useMemo} from "react";
 import {useParams} from "react-router-dom";
-import {useSelector} from "../../service/hooks";
+import {useDispatch, useSelector} from "../../service/hooks";
 import styles from './feed-details.module.css'
 import {dateFormatter} from "../../service/feed-details.service";
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import {FeedDetailsItem} from "../feed-details-item/feed-details-item";
+import {wsConnection, wsConnectionClosed} from "../../redux/actions/ws-feed-actions";
 
 
 export const FeedDetails: FC = () => {
+
+    const WS_FEED_URL = 'wss://norma.nomoreparties.space/orders/all'
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(wsConnection(WS_FEED_URL))
+        return () => {
+            dispatch(wsConnectionClosed())
+        }
+    }, [dispatch])
 
     const {orderId} = useParams<{ orderId: string }>()
 
@@ -64,7 +75,7 @@ export const FeedDetails: FC = () => {
 
     return (
         <div className={styles.feedDetails}>
-            <div className={"text text_type_digits-default"} style={{margin: '0 0 20px 0',width: '30%'}}>
+            <div className={"text text_type_digits-default"} style={{margin: '0 0 20px 0', width: '30%'}}>
                 {'#' + detailsInfo.order.number}
             </div>
             <div className={"text text_type_main-default"}>
@@ -75,7 +86,7 @@ export const FeedDetails: FC = () => {
             </div>
             <div>
                 <h2 style={{marginBottom: '15px'}}>Состав:</h2>
-                <FeedDetailsItem items={detailsInfo?.ingredients} />
+                <FeedDetailsItem items={detailsInfo?.ingredients}/>
             </div>
             <div className={styles.feedDetailsFooter}>
                 <div className={'text text_color_inactive'}>

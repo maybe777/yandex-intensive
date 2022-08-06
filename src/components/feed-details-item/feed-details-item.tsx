@@ -20,8 +20,8 @@ export const FeedDetailsItem = ({items}: IFeedDetailsItem) => {
 
     return (
         <div className={styles.items}>
-            {uniqueItems.map((item: IBurgerItem) => (
-                <div className={styles.itemsDetails}>
+            {uniqueItems.map((item: IBurgerItem, index) => (
+                <div key={item._id + index} className={styles.itemsDetails}>
                     <div className={styles.detailsDescription}>
                         <div className={styles.ingredientImg}>
                             <img style={{marginLeft: "-32px"}} src={item.image_mobile} alt={item.name}/>

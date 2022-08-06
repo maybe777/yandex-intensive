@@ -13,14 +13,14 @@ export const FeedList = ({items}: IFeedList) => {
         <div className={styles.feedList}>
             <ul className={styles.feedListUl}>
                 {
-                    items.map((item: TWSOrder, index) => (
-                        <Link
-                            to={{
-                                pathname: url + '/' + item._id,
-                                state: {background: location}
-                            }}>
-                            <li key={item._id + ' ' +item.number * randomIntFromInterval(index, item.number)}
-                                className={styles.feedListItem}>
+                    items.map((item: TWSOrder) => (
+
+                        <li key={item._id} className={styles.feedListItem}>
+                            <Link
+                                to={{
+                                    pathname: url + '/' + item._id,
+                                    state: {background: location}
+                                }}>
                                 <FeedComponent
                                     _id={item._id}
                                     createdAt={item.createdAt}
@@ -30,8 +30,10 @@ export const FeedList = ({items}: IFeedList) => {
                                     status={item.status}
                                     updatedAt={item.updatedAt}
                                 />
-                            </li>
-                        </Link>))}
+
+                            </Link>
+                        </li>
+                    ))}
             </ul>
         </div>
     )

@@ -60,7 +60,7 @@ export const FeedComponent = (order: TWSOrder) => {
                         {orderInfo?.ingredientsShow.map((ingredient, index) => {
                                 let zIndex = ingredientsSlice - index
                                 return (
-                                    <li key={index} className={styles.ingredientImg}
+                                    <li key={ingredient._id + index} className={styles.ingredientImg}
                                         style={{
                                             zIndex: zIndex,
                                             marginLeft: '-25px',

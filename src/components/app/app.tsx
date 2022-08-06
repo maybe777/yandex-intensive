@@ -19,8 +19,6 @@ import OrderDetails from "../details-order/order-details";
 import {getLocalStorageItem} from "../../service/token-service";
 import {Feed} from "../../pages/feed/feed";
 import {FeedDetails} from "../feed-details/feed-details";
-import {wsConnection, wsConnectionClosed} from "../../redux/actions/ws-feed-actions";
-import {wsOrderConnection, wsOrderConnectionClosed} from "../../redux/actions/ws-order-actions";
 import {clearOrderItems} from "../../redux/actions/constructor-actions";
 
 

@@ -31,6 +31,28 @@ export const dataRequest = async () => {
     return result;
 }
 
+export async function fetchOrderDetails(orderNumber: number): Promise<TWSOrder | null> {
+
+    let result: TWSOrder | null = null;
+
+    await fetch(ORDER_URL + '/' + orderNumber, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(checkResponse)
+        .then(data => {
+            if (data.success === true) {
+                result = data.order
+            } else {
+                throw new Error("Ошибка загрузки данных заказа с номером: " + orderNumber)
+            }
+        })
+    return result;
+}
+
 export async function fetchOrder(ingredients: Array<string>): Promise<number> {
 
     let result: number = 0;
