@@ -3,6 +3,7 @@ import {ListIcon, Logo, ProfileIcon} from '@ya.praktikum/react-developer-burger-
 import {BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './app-header.module.css';
 import {NavLink, Link, useRouteMatch} from 'react-router-dom';
+import {useSelector} from "../../service/hooks";
 
 
 const AppHeader: FC = () => {
@@ -10,6 +11,7 @@ const AppHeader: FC = () => {
     const isConstructor: boolean = !!useRouteMatch({path: '/', exact: true})
     const isFeed: boolean = !!useRouteMatch({path: '/feed', exact: true})
     const isProfile: boolean = !!useRouteMatch({path: '/profile', exact: true})
+    const {user} = useSelector(store => store.auth)
 
     return (
         <header className={styles.header}>
@@ -52,8 +54,10 @@ const AppHeader: FC = () => {
                             className={styles.link}
                             activeClassName={styles.active}
                             to={'/profile'}
-                            exact>
-                            &nbsp;Личный кабинет
+                            exact>{
+                            //@ts-ignore
+                            user ? '\u00A0' + user.name : '\u00A0Личный кабинет'
+                        }
                         </NavLink>
                     </li>
                 </ul>

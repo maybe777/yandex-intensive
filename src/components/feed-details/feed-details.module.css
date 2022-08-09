@@ -1,0 +1,24 @@
+.feedDetails {
+    display: flex;
+    flex-direction: column;
+    width: 650px;
+}
+
+.feedDetails ul {
+    height: 250px;
+    overflow-y: scroll;
+}
+
+.feedDetailsFooter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

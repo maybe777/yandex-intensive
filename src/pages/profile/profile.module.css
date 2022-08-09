@@ -3,3 +3,7 @@
     grid-template-columns: 33% 33% 300px;
     margin-top: 50px;
 }
+
+.orderList{
+    height: 800px;
+}

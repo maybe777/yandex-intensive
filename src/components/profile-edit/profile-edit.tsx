@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC, useEffect} from 'react'
 import styles from "./profile-edit.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../service/hooks";
 import {editProfile, fetchProfile, setUserProfileFormValue} from "../../redux/actions/user-profile-actions";
 
 
@@ -10,24 +10,23 @@ export const ProfileEdit: FC = () => {
     const dispatch = useDispatch()
 
     const {
-        name,
-        email
-    } = useSelector((store: any) => store.profile.form)
+        form: {
+            name,
+            email
+        }
+    } = useSelector(store => store.profile)
 
     useEffect(() => {
-        //@ts-ignore
         dispatch(fetchProfile())
     }, [dispatch])
 
 
     const editProfileHandler = () => {
-        //@ts-ignore
         dispatch(editProfile(name, email))
     }
 
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        //@ts-ignore
         dispatch(setUserProfileFormValue(e.target.name, e.target.value))
     }
 

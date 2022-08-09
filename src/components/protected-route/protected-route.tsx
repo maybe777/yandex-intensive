@@ -1,11 +1,11 @@
 import React, {FC} from "react";
 import {Redirect, Route, useLocation} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useSelector} from "../../service/hooks";
 
 
 export const ProtectedRoute: FC<TProtectedRoute> = ({isAuthOnly = false, children, ...rest}) => {
 
-    const user = useSelector((store: any) => store.auth.user)
+    const {user} = useSelector(store => store.auth)
     const location = useLocation()
 
     if (!isAuthOnly && user) {

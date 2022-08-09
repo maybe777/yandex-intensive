@@ -1,0 +1,38 @@
+.items {
+    height: 250px;
+    overflow-y: scroll;
+}
+
+.itemsDetails {
+    display: flex;
+    flex-direction: row;
+    width: 98%;
+    align-items: center;
+    margin: 0 10px 10px 0;
+    justify-content: space-between;
+}
+
+.ingredientImg {
+    height: 70px;
+    width: 77px;
+    border-radius: 50px;
+    border: 2px solid #6a37ac;
+    background: #000;
+    margin-right: 20px;
+}
+
+.priceDetails {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.detailsDescription {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.ml {
+    margin-left: 8px;
+}

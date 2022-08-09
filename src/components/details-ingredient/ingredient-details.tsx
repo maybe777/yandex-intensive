@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {useSelector} from "react-redux";
+import {useSelector} from "../../service/hooks";
 import styles from './ingredient-details.module.css'
 import {useParams} from "react-router-dom";
 
@@ -8,7 +8,7 @@ const IngredientDetails: FC = () => {
 
     const {id} = useParams<{ id: string }>();
 
-    const item: IBurgerItem = useSelector((store: any) => {
+    const item = useSelector(store => {
         return store.ingredients.data.find((item: IBurgerItem) => item._id === id);
     });
 

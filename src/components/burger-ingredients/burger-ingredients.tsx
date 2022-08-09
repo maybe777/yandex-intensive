@@ -1,19 +1,15 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
 import styles from './burger-ingredients.module.css'
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
-import {useDispatch, useSelector} from "react-redux";
-import {showDetails} from "../../redux/actions/details-actions";
+import {useSelector} from "../../service/hooks";
 import {elementCalculator} from "../../service/scroll-calcuator";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 
 
 const BurgerIngredients: FC = () => {
 
-    const data = useSelector((store: any) => store.ingredients.data)
-
-    const items: Array<IBurgerItem> = useSelector((store: any) => store.burger.items)
-
-    const dispatch = useDispatch()
+    const data = useSelector(store => store.ingredients.data)
+    const items: Array<IBurgerItem> = useSelector(store => store.burger.items)
 
     const [scrollIndex, setScrollIndex] = useState<number>(0)
 
@@ -21,19 +17,17 @@ const BurgerIngredients: FC = () => {
         let component: HTMLElement | null = document.getElementById('items')
         const handler = () => {
             let index = elementCalculator(
-                // @ts-ignore
-                component.scrollTop,
+                //@ts-ignore
+                component?.scrollTop,
                 ALL,
                 0,
                 ALL.length - 1
             );
             setScrollIndex(index)
         };
-        // @ts-ignore
-        component.addEventListener("scroll", handler);
+        component?.addEventListener("scroll", handler);
         return () => {
-            // @ts-ignore
-            component.removeEventListener("scroll", handler);
+            component?.removeEventListener("scroll", handler);
         };
     }, []);
 
@@ -41,20 +35,15 @@ const BurgerIngredients: FC = () => {
     const sauceRef = useRef<HTMLElement>(null)
     const noviceRef = useRef<HTMLElement>(null)
 
-    function openModal(item: IBurgerItem) {
-        // @ts-ignore
-        dispatch(showDetails(item))
-    }
-
-    const BUNS: Array<IBurgerItem> = data.filter((item: IBurgerItem | any) => {
+    const BUNS: Array<IBurgerItem> = data.filter((item: IBurgerItem) => {
         return item.type === "bun";
     })
 
-    const SAUCE: Array<IBurgerItem> = data.filter((item: IBurgerItem | any) => {
+    const SAUCE: Array<IBurgerItem> = data.filter((item: IBurgerItem) => {
         return item.type === "sauce";
     })
 
-    const NOVICE: Array<IBurgerItem> = data.filter((item: IBurgerItem | any) => {
+    const NOVICE: Array<IBurgerItem> = data.filter((item: IBurgerItem) => {
         return item.type === "main";
     })
 
@@ -75,10 +64,7 @@ const BurgerIngredients: FC = () => {
                 <h2 ref={category.ref}>{category.title}</h2>
             </div>
             {category.data.map((item: IBurgerItem) => (
-                <div key={"item_" + item._id} className={styles.ingredient + " mb-3"}
-                     onClick={() => {
-                         openModal(item)
-                     }}>
+                <div key={"item_" + item._id} className={styles.ingredient + " mb-3"}>
                     <BurgerIngredient item={item} count={itemsCount(items, item)}/>
                 </div>
             ))}

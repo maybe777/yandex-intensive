@@ -12,11 +12,14 @@ import styles from "./app.module.css";
 import AppHeader from "../header/app-header";
 import {ProtectedRoute} from "../protected-route/protected-route";
 import Modal from "../modal/modal";
-import {useDispatch} from "react-redux";
+import {useDispatch} from "../../service/hooks";
 import {getUser} from "../../redux/actions/auth-actions";
 import {getData} from "../../redux/actions/ingredients-actions";
 import OrderDetails from "../details-order/order-details";
 import {getLocalStorageItem} from "../../service/token-service";
+import {Feed} from "../../pages/feed/feed";
+import {FeedDetails} from "../feed-details/feed-details";
+import {clearOrderItems} from "../../redux/actions/constructor-actions";
 
 
 const App: FC = () => {
@@ -28,10 +31,8 @@ const App: FC = () => {
     const loggedIn: boolean = !!getLocalStorageItem('user')
 
     useEffect(() => {
-        // @ts-ignore
         dispatch(getData())
         if (loggedIn) {
-            //@ts-ignore
             dispatch(getUser())
         }
     }, [dispatch])
@@ -47,13 +48,19 @@ const App: FC = () => {
                     <Route path={"/ingredients/:id"} exact={true}>
                         <IngredientDetails/>
                     </Route>
+                    <Route path='/feed/:orderId' exact={true}>
+                        <FeedDetails/>
+                    </Route>
+                    <ProtectedRoute isAuthOnly={true} path='/profile/orders/:orderId' exact={true}>
+                        <FeedDetails/>
+                    </ProtectedRoute>
                     <ProtectedRoute path={"/forgot-password"} exact={true}>
                         <PasswordForgotPage/>
                     </ProtectedRoute>
                     <ProtectedRoute path={"/reset-password"} exact={true}>
                         <PasswordResetPage/>
                     </ProtectedRoute>
-                    <ProtectedRoute isAuthOnly={true} path={"/profile"} exact={true}>
+                    <ProtectedRoute isAuthOnly={true} path={"/profile"} exact={false}>
                         <ProfilePage/>
                     </ProtectedRoute>
                     <ProtectedRoute path={"/register"} exact={true}>
@@ -62,6 +69,9 @@ const App: FC = () => {
                     <ProtectedRoute path={"/login"} exact={true}>
                         <LoginPage/>
                     </ProtectedRoute>
+                    <Route path={"/feed"} exact={true}>
+                        <Feed/>
+                    </Route>
                     <Route path={"/"} exact={true}>
                         <MainPage/>
                     </Route>
@@ -80,9 +90,27 @@ const App: FC = () => {
                                     <IngredientDetails/>
                                 </Modal>
                             </Route>
+                            <Route path='/feed/:orderId' exact={true}>
+                                <Modal
+                                    onClose={() => {
+                                        history.goBack()
+                                        console.log("Onclose pressed!")
+                                    }} title={""}>
+                                    <FeedDetails/>
+                                </Modal>
+                            </Route>
+                            <ProtectedRoute isAuthOnly={true} path='/profile/orders/:orderId' exact={true}>
+                                <Modal
+                                    onClose={() => {
+                                        history.goBack()
+                                    }} title={""}>
+                                    <FeedDetails/>
+                                </Modal>
+                            </ProtectedRoute>
                             <ProtectedRoute isAuthOnly={true} path='/order' exact={true}>
                                 <Modal
                                     onClose={() => {
+                                        dispatch(clearOrderItems())
                                         history.goBack()
                                     }} title={""}>
                                     <OrderDetails/>

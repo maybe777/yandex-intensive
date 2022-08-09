@@ -10,7 +10,7 @@ interface IBurgerItem {
     image: string,
     image_mobile: string,
     image_large: string,
-    __v: number
+    __v: string
 }
 
 type IIngredientState = {
@@ -19,12 +19,14 @@ type IIngredientState = {
     data: Array<IBurgerItem>
 }
 
-type IOrderState = Omit<IIngredientState, 'data'> & {
+type IOrderState = {
+    orderRequest: boolean,
+    orderFailed: boolean,
     number: number
 }
 
 interface IHeaderData {
-    title?: String,
+    title?: string | undefined,
     data: Array<IBurgerItem>,
     ref?: MutableRefObject<null>,
 }
@@ -59,7 +61,7 @@ type TOptions = {
 }
 
 type TBurgerProps = {
-    item : IBurgerItem,
+    item: IBurgerItem,
     count: number
 }
 
@@ -84,9 +86,82 @@ type TProtectedRoute = {
     exact: boolean
 }
 
-interface IElementCalc {
-    currentPosition: number,
-    sectionPositionArray: IHeaderData[],
-    startIndex: number,
-    endIndex: number
+interface IAuthInitialState {
+    form: {
+        login: string,
+        password: string
+    },
+
+    loggedIn: boolean,
+    loggedOut: boolean,
+    userRequest: boolean,
+    loginRequest: boolean,
+    logoutRequest: boolean,
+    userError: boolean,
+    loginError: boolean,
+    logoutError: boolean,
+    user: TUser | null
+}
+
+interface IRegisterInitialState {
+    form: {
+        name: string,
+        email: string,
+        password: string
+    },
+    registrationRequest: boolean,
+    registrationError: boolean,
+}
+
+interface IUserProfileInitialState {
+    form?: {
+        name: string,
+        email: string
+    },
+    editProfileRequest: boolean,
+    editProfileError: boolean,
+    profileRequest: boolean,
+    profileError: boolean,
+    error: string
+}
+
+type TWSOrder = {
+    _id: string,
+    ingredients: Array<string>,
+    status: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+    number: number
+}
+
+type TFeedData = {
+    success: boolean,
+    orders: Array<TWSOrder>,
+    total: number,
+    totalToday: number
+}
+
+interface TWSInitState {
+    wsConnect?: false,
+    wsRequest?: false,
+    data: TFeedData,
+
+    error?: string,
+    item?: TWSOrder | null
+}
+
+type TWSAction = {
+    type: string,
+    payload: string
+}
+
+interface IFeedList {
+    items: Array<TWSOrder>
+}
+
+interface IOrderDetailsState {
+    orderDetailsRequest: boolean,
+    orderDetailsError: boolean,
+    order: TWSOrder | null
 }

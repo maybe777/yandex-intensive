@@ -1,0 +1,79 @@
+.feed {
+    min-width: 100%;
+}
+
+.feed h4 {
+    margin: 0 0 0 10px;
+}
+
+.feed ul {
+    margin: 0;
+    padding-left: 10px;
+}
+
+.feed li {
+    margin-right: 10px;
+}
+
+
+.feedGrid {
+    display: grid;
+    grid-template:
+            'head head'
+            'feedList orderStat';
+    grid-column-gap: 25px;
+}
+
+.feedHead {
+    grid-area: head;
+}
+
+.orderStat {
+    margin-left: -170px;
+    height: 480px;
+    grid-area: orderStat;
+    display: grid;
+    grid-template:
+            'ready making'
+            'total total'
+            'today today';
+    grid-row-gap: 40px;
+}
+
+.ready {
+    margin: 0;
+    height: 120px;
+    width: 50%;
+    grid-area: ready;
+}
+
+.ready li {
+    color: cadetblue;
+}
+
+.making {
+    height: 120px;
+    width: 50%;
+    grid-area: making;
+}
+
+.total {
+    height: 80px;
+    grid-area: total;
+}
+
+.today {
+    height: 80px;
+    grid-area: today;
+}
+
+.split {
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.split li {
+    margin-top: 5px;
+}

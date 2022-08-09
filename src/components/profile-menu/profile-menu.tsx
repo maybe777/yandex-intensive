@@ -1,15 +1,15 @@
 import React, {FC} from "react"
-import {NavLink} from "react-router-dom";
+import {NavLink, useRouteMatch} from "react-router-dom";
 import styles from './profile-menu.module.css'
-import {useDispatch} from "react-redux";
+import {useDispatch} from "../../service/hooks";
 import {userLogout} from "../../redux/actions/auth-actions";
 
 export const ProfileMenu: FC = () => {
 
-    const dispatch = useDispatch()
+    const {url} = useRouteMatch()
 
+    const dispatch = useDispatch()
     const logoutHandler = () => {
-        //@ts-ignore
         dispatch(userLogout())
     }
 
@@ -17,28 +17,19 @@ export const ProfileMenu: FC = () => {
         <div className={styles.menu}>
             <ul className={styles.menuItem}>
                 <li>
-                    <h3>
-                        <NavLink to={'/profile'}
-                            //@ts-ignore
-                                 className={({isActive}) => (
-                                     isActive ? styles.activeMenu : ''
-                                 )}
-                        >Профиль</NavLink>
-                    </h3>
+                    <NavLink to={url} className={({isActive}: any) => (isActive ? styles.activeMenu : '')}>
+                        Профиль
+                    </NavLink>
                 </li>
                 <li>
-                    <h3>
-                        <NavLink to={{pathname: `/orders`}}
-                            //@ts-ignore
-                                 className={({isActive}) => (
-                                     isActive ? styles.activeMenu : ''
-                                 )}>Заказы</NavLink>
-                    </h3>
+                    <NavLink to={`${url}/orders`} className={({isActive}: any) => (isActive ? styles.activeMenu : '')}>
+                        Заказы
+                    </NavLink>
                 </li>
                 <li>
-                    <h3>
-                        <NavLink to={{pathname: `/login`}} onClick={logoutHandler}>Выход</NavLink>
-                    </h3>
+                    <NavLink to={`/login`} onClick={logoutHandler}>
+                        Выход
+                    </NavLink>
                 </li>
                 <li>
                     <p className={styles.dark}>В этом разделе вы можете изменить свои персональные данные</p>
@@ -46,5 +37,4 @@ export const ProfileMenu: FC = () => {
             </ul>
         </div>
     );
-
 }

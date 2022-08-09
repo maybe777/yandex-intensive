@@ -9,7 +9,6 @@ export function PasswordForgotPage() {
 
     const [email, setEmail] = useState("")
 
-
     const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
     }
