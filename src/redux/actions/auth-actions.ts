@@ -27,7 +27,7 @@ export const getUser = (): TAppThunk => (dispatch: TAppDispatch) => {
 
     dispatch(getUserRequest());
 
-    fetchUser()
+    return fetchUser()
         .then(user => {
             dispatch(getUserSuccess(user))
         }).catch(
@@ -45,7 +45,7 @@ export const getUser = (): TAppThunk => (dispatch: TAppDispatch) => {
     }
 
     function getUserError(): TAuthActions {
-        return {type: LOGIN_ERROR}
+        return {type: GET_USER_ERROR}
     }
 }
 
@@ -53,13 +53,13 @@ export const userLogin = (email: string, password: string): TAppThunk => (dispat
 
     dispatch(loginRequest());
 
-    login(email, password)
+    return login(email, password)
         .then(data => {
             dispatch(loginSuccess(data.user));
         }).catch(
-        () => {
-            dispatch(loginError())
-        });
+            () => {
+                dispatch(loginError())
+            });
 
 
     function loginRequest(): TAuthActions {
@@ -79,7 +79,7 @@ export const userLogout = () => (dispatch: TAppDispatch) => {
 
     dispatch(logoutRequest())
 
-    logout()
+    return logout()
         .then(() => {
             dispatch(logoutSuccess())
         })
