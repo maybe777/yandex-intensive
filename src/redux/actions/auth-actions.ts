@@ -12,7 +12,7 @@ export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
 export const GET_USER_ERROR = 'GET_USER_ERROR'
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
-export const LOGOUT_ERROR = 'LOGIN_ERROR'
+export const LOGOUT_ERROR = 'LOGOUT_ERROR'
 
 export const setLoginFormValue = (field: string, value: string) => (dispatch: TAppDispatch) => {
 
