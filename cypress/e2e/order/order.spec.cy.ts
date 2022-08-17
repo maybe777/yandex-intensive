@@ -1,4 +1,6 @@
+import auth from '../../fixtures/auth.fixture';
 import getIngredients from '../../fixtures/constructor.fixture';
+import postOrder from '../../fixtures/order.fixture';
 
 const addIngredientsInOrder = () => {
     const dataTransfer = new DataTransfer();
@@ -30,16 +32,19 @@ describe('На главной странице можно офрмить зак�
 
     describe('Оформление заказа (только авторизованный польователь.)', () => {
         beforeEach(() => {
+            getIngredients()
             window.localStorage.setItem(
-                "refreshToken",
-                JSON.stringify("test-refreshToken")
+                "user",
+                JSON.stringify({
+                    email: "review25@mail.com",
+                    name: "review"
+                })
             );
             cy.setCookie('accessToken', 'test-accessToken')
-            cy.viewport(1300, 800);
-            cy.intercept('POST', '/api/auth/token', {fixture: 'refresh-token.json'}).as('refresh');
-            cy.intercept('GET', '/api/auth/user', {fixture: 'user.json'}).as('auth');
-            cy.intercept('POST', '**/api/orders', {fixture: 'order.json'}).as('order');
             cy.visit("http://localhost:3000");
+
+            auth();
+            postOrder();
         });
 
         afterEach(() => {
@@ -48,6 +53,7 @@ describe('На главной странице можно офрмить зак�
         });
 
         it('Когда пользователь авторизован и нажимает "оформить заказ", заказ оформляется и открыввается модальное окно', () => {
+            cy.wait('@ingredients');
             cy.get('#burger-constructor').as('constructor');
 
             addIngredientsInOrder();
