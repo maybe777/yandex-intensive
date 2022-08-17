@@ -71,7 +71,7 @@ const BurgerConstructor: FC = () => {
     const mainStyle: string = isHover ? styles.main + " " + styles.onHoverMain : styles.main
 
     return (
-        <div ref={dropTarget} className={mainStyle}>
+        <div id='burger-constructor' ref={dropTarget} className={mainStyle}>
             <div className={styles.bun + " pl-5 pr-2 mr-2"}>
                 {burgerTop}
             </div>

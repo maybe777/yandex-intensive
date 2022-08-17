@@ -3,7 +3,7 @@ import styles from './modal-overlay.module.css'
 
 const ModalOverlay:FC = () => {
     return (
-        <div className={styles.overlay}/>
+        <div id='overlay' className={styles.overlay}/>
     );
 }
 

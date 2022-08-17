@@ -71,6 +71,10 @@ const BurgerIngredients: FC = () => {
         </div>
     ));
 
+    if (data.length == 0) {
+        return (<div><p>Пусто</p></div>)
+    }
+
     return (
         <div className={styles.ingredientWrapper}>
             <div className={styles.navigationContainer + " mb-3"}>
