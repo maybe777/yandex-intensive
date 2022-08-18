@@ -12,7 +12,7 @@ export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
 export const GET_USER_ERROR = 'GET_USER_ERROR'
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
-export const LOGOUT_ERROR = 'LOGIN_ERROR'
+export const LOGOUT_ERROR = 'LOGOUT_ERROR'
 
 export const setLoginFormValue = (field: string, value: string) => (dispatch: TAppDispatch) => {
 
@@ -27,7 +27,7 @@ export const getUser = (): TAppThunk => (dispatch: TAppDispatch) => {
 
     dispatch(getUserRequest());
 
-    fetchUser()
+    return fetchUser()
         .then(user => {
             dispatch(getUserSuccess(user))
         }).catch(
@@ -45,7 +45,7 @@ export const getUser = (): TAppThunk => (dispatch: TAppDispatch) => {
     }
 
     function getUserError(): TAuthActions {
-        return {type: LOGIN_ERROR}
+        return {type: GET_USER_ERROR}
     }
 }
 
@@ -53,13 +53,13 @@ export const userLogin = (email: string, password: string): TAppThunk => (dispat
 
     dispatch(loginRequest());
 
-    login(email, password)
+    return login(email, password)
         .then(data => {
             dispatch(loginSuccess(data.user));
         }).catch(
-        () => {
-            dispatch(loginError())
-        });
+            () => {
+                dispatch(loginError())
+            });
 
 
     function loginRequest(): TAuthActions {
@@ -79,7 +79,7 @@ export const userLogout = () => (dispatch: TAppDispatch) => {
 
     dispatch(logoutRequest())
 
-    logout()
+    return logout()
         .then(() => {
             dispatch(logoutSuccess())
         })

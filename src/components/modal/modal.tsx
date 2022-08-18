@@ -40,12 +40,12 @@ const Modal: FC<IModal> = ({title, onClose, children}) => {
     return ReactDOM.createPortal(
         <>
             <ModalOverlay/>
-            <div ref={modalRef} className={styles.modal}>
+            <div id='modal' ref={modalRef} className={styles.modal}>
                 <div className={styles.modalContainer}>
                     <div className={styles.head}>
                         <p className={"text text_type_main-large pt-2"}>{title}</p>
                     </div>
-                    <div className={styles.close}>
+                    <div id='modal_close' className={styles.close}>
                         <CloseIcon type={'primary'} onClick={onClose}/>
                     </div>
                     <div className={styles.content}>
